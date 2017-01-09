@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/01/09 14:23:13 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/01/09 18:54:07 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -14,7 +14,8 @@ NAME = fillit
 
 SRC = main.c \
 	  read.c \
-	  read2.c
+	  read2.c \
+	  organize.c
 
 OBJ		= 	$(SRC:.c=.o)
 

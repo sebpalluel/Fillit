@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/11/10 23:29:24 by psebasti          #+#    #+#             *#
-#*   Updated: 2016/11/19 18:22:49 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/01/09 17:38:34 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -20,6 +20,7 @@ SRC		=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c	\
 			ft_strmap.c	ft_strmapi.c ft_strequ.c ft_strnequ.c				\
 			ft_strsub.c	ft_strnew.c ft_strjoin.c ft_strsplit.c				\
 			ft_strdel.c ft_strclr.c	ft_strdup.c								\
+			ft_intlen.c ft_intmin.c ft_intmax.c								\
 			ft_tolower.c ft_toupper.c ft_isprint.c ft_isascii.c				\
 			ft_isdigit.c ft_isalnum.c ft_isalpha.c ft_isspace.c				\
 			ft_putchar.c ft_putchar_fd.c ft_putstr.c ft_putstr_fd.c			\
@@ -28,8 +29,8 @@ SRC		=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c	\
 			ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c				\
 			ft_lstiter.c ft_lstmap.c	
 OBJ		= 	$(SRC:.c=.o)
-CMP		= 	gcc
-FLAGS	= 	-Wall -Wextra -Werror
+	CMP		= 	gcc
+	FLAGS	= 	-Wall -Wextra -Werror
 
 all: $(NAME)
 

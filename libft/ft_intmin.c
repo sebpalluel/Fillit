@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_intmin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 15:19:55 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/09 17:15:08 by psebasti         ###   ########.fr       */
+/*   Created: 2017/01/09 17:20:22 by psebasti          #+#    #+#             */
+/*   Updated: 2017/01/09 17:36:03 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlen(const char *str)
+int		ft_intmin(int *array)
 {
 	size_t	i;
+	size_t	size;
+	int		minimum;
 
-	i = 0;
-	while (str[i] != '\0')
+	size = ft_intlen(array);
+	minimum = array[0];
+	i = 1;
+	while (i < size)
+	{
+		if (array[i] < minimum)
+			minimum = array[i];
 		i++;
-	return (i);
+	}
+	return (minimum);
 }

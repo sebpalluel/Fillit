@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 15:19:55 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/09 17:15:08 by psebasti         ###   ########.fr       */
+/*   Created: 2017/01/09 17:15:43 by psebasti          #+#    #+#             */
+/*   Updated: 2017/01/09 17:16:48 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlen(const char *str)
+size_t		ft_intlen(int *array)
 {
 	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (array[i])
 		i++;
 	return (i);
 }

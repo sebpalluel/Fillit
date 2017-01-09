@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 15:50:29 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/09 17:37:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/09 19:39:14 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int					ft_tolower(int c);
 
 int					ft_atoi(const char *str);
 char				*ft_itoa(int n);
-
+int					ft_sqr(int n);
 char				*ft_strcat(char *src, const char *dest);
 char				*ft_strchr(const char *src, int c);
 int					ft_strcmp(const char *s1, const char *s2);

@@ -6,11 +6,10 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:45 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/09 12:53:05 by kda-fons         ###   ########.fr       */
+/*   Updated: 2017/01/09 14:35:25 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "fillit.h"
 
 char	*read_tetri(int fd)

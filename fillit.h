@@ -6,15 +6,17 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/09 12:50:40 by kda-fons         ###   ########.fr       */
+/*   Updated: 2017/01/09 14:37:35 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
 # include <string.h>
+# include <fcntl.h>
+# include <stdlib.h>
 # include <unistd.h>
-# include "libft.h"
+# include "libft/libft.h"
 
 typedef	struct	s_point
 {
@@ -34,3 +36,10 @@ typedef	struct	s_map
 	char	**array;
 }		t_map;
 
+char	*read_tetri(int fd);
+int		check_format(char *str);
+int		check_tetri(char *str);
+int		check_valid(char *str);
+t_tetri	*read_tetri(int fd);
+
+#endif

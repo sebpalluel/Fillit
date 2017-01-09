@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/09 16:25:43 by kda-fons         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:45:58 by kda-fons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ t_tetri		create_tetri(char *str, char carac)
 	current = 0;
 	while (str[i])
 	{
+		if ((i % 5) == 0)
+			j++;
 		if (str[i] == '#')
 		{
-			new.coord[current].x = (i % 20);
+			new.coord[current].x = (i % 5);
 			new.coord[current].y = j;
 			current++;
-			j++;
 		}
 		i++;
 	}
 	tetri.value = carac;
-	carac++;
 	return (new);
 }

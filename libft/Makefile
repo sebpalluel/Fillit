@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/11/10 23:29:24 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/01/10 14:41:50 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/01/10 16:31:46 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -25,7 +25,7 @@ SRC		=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c	\
 			ft_isdigit.c ft_isalnum.c ft_isalpha.c ft_isspace.c				\
 			ft_putchar.c ft_putchar_fd.c ft_putstr.c ft_putstr_fd.c			\
 			ft_putendl.c ft_putendl_fd.c ft_putnbr.c ft_putnbr_fd.c			\
-			ft_atoi.c ft_itoa.c ft_sqr.c									\
+			ft_atoi.c ft_itoa.c ft_sqrt.c									\
 			ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c				\
 			ft_lstiter.c ft_lstmap.c ft_lstlen.c
 OBJ		= 	$(SRC:.c=.o)

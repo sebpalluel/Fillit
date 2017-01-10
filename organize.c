@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/10 16:38:41 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:42:57 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	mv_upleft(t_point *coord, size_t *min)
 	}
 }
 
-int		calc_min_square(t_tetris *list)
+int		calc_min_square(t_tetri *tet)
 {
 	int numtetri;
 	int numblocks;
 
-	numtetri = ft_lstlen(list);
+	numtetri = ft_lstlen(tet);
 	numblocks = numtetri * 4;
 	return (ft_sqrt(numblocks));
 }

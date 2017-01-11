@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/09 18:56:12 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/11 14:45:41 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef	struct		s_tetri
 {
 	t_point			coord[4];
 	char			value;
+	struct s_tetri	*next;
 }					t_tetri;
 
 typedef	struct		s_map

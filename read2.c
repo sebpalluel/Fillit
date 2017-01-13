@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/09 14:28:00 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 16:50:56 by kda-fons         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,20 @@ int	check_valid(char *str)
 
 t_list	*read_tetri(int fd)
 {
-	char		buffer;
+	char		*buffer;
 	char		carac;
-	t_list		*list;
 	t_tetri		*tetri;
 
 	buffer = ft_strnew(21);
 	carac = 'A';
 	while (read(fd, buffer, 21))
-		if (check_valid(buffer))
-			;/*create tetris*/
+	{
+		if (!check_valid(buffer))
+		{
+			ft_strdel(buffer);
+			return (free_tetri(tetri));
+		}
+		add_tetri(create_tetri(buffer, carac));
+		carac++;
+	}
 }

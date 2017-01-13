@@ -33,11 +33,10 @@ typedef	struct		s_map
 	char			*array;
 }					t_map;
 
-char				*read_tetri(int fd);
+t_tetri				*read_tetri(int fd);
 int					check_format(char *str);
 int					check_tetri(char *str);
 int					check_valid(char *str);
-t_list				*read_tetri(int fd);
 void				organize(t_tetri *tet);
 size_t				tet_min_xy(t_tetri *tet, int xy);
 void				mv_upleft(t_tetri *tet, size_t *min);

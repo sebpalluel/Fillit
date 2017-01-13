@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 14:36:33 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/10 14:43:43 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 16:33:04 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 
 int		ft_lstlen(t_list *lst)
 {
-	t_list	*tmp_list;
 	int		counter;
 
-	tmp_list = lst;
 	counter = 0;
-	if (tmp_list == NULL)
-		return (0);
-	while (tmp_list->next != NULL)
+	while (lst && lst->next)
 	{
-		tmp_list = tmp_list->next;
 		counter++;
+		lst = lst->next;
 	}
 	return (counter + 1);
 }

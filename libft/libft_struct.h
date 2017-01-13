@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_srtdup.c                                        :+:      :+:    :+:   */
+/*   libft_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/11 17:14:44 by psebasti          #+#    #+#             */
-/*   Updated: 2016/11/17 16:28:45 by psebasti         ###   ########.fr       */
+/*   Created: 2017/01/13 19:31:09 by psebasti          #+#    #+#             */
+/*   Updated: 2017/01/13 19:31:52 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFT_STRUCT_H
+# define LIBFT_STRUCT_H
 
-char	*ft_strdup(const char *src)
+typedef struct		s_list
 {
-	char	*dest;
-	size_t	length;
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
 
-	length = ft_strlen(src) + 1;
-	if (!(dest = (char*)ft_memalloc(length)))
-		return (NULL);
-	ft_memcpy((void*)dest, (void*)src, length);
-	return (dest);
-}
+#endif

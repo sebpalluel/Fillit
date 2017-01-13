@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/11 14:45:41 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 16:53:01 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,20 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft/libft.h"
-
-typedef	struct		s_point
-{
-	unsigned int	x;
-	unsigned int	y;
-}					t_point;
+# include <stdio.h> // temporary, to test function, don't forget to erase with all the printf !!
 
 typedef	struct		s_tetri
 {
-	t_point			coord[4];
+	unsigned int	coord[4][2];
 	char			value;
 	struct s_tetri	*next;
 }					t_tetri;
 
 typedef	struct		s_map
 {
-	int				size;
-	char			**array;
+	size_t			size;
+	size_t			map_size;
+	char			*array;
 }					t_map;
 
 char				*read_tetri(int fd);
@@ -43,7 +39,12 @@ int					check_tetri(char *str);
 int					check_valid(char *str);
 t_list				*read_tetri(int fd);
 void				organize(t_tetri *tet);
-size_t				tet_min_xy(t_point *coord, int xy);
-void				mv_upleft(t_point *coord, size_t *min);
-
+size_t				tet_min_xy(t_tetri *tet, int xy);
+void				mv_upleft(t_tetri *tet, size_t *min);
+int					calc_min_square(t_tetri *tet);
+void				solve(t_tetri *tet);
+void				initmap(t_map map);
+int					backtracker(t_map map, t_tetri *tet, int flag);
+void				erase_tetri(char *array, t_tetri *tet);
+int					put_tetri(t_map map, t_tetri *tet, int pos);
 #endif

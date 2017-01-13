@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/13 16:53:01 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 17:15:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_list				*read_tetri(int fd);
 void				organize(t_tetri *tet);
 size_t				tet_min_xy(t_tetri *tet, int xy);
 void				mv_upleft(t_tetri *tet, size_t *min);
-int					calc_min_square(t_tetri *tet);
+int					calc_min_size(t_tetri *tet);
 void				solve(t_tetri *tet);
-void				initmap(t_map map);
+t_map				initmap(size_t	size);
 int					backtracker(t_map map, t_tetri *tet, int flag);
 void				erase_tetri(char *array, t_tetri *tet);
 int					put_tetri(t_map map, t_tetri *tet, int pos);

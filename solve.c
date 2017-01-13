@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/13 18:13:22 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 18:27:38 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,19 @@ int		put_tetri(t_map map, t_tetri *tet, int pos)
 	i = 0;
 	tmp_map = initmap(map.size);
 	map.array = map.array + pos;
-	while (tmp_map[i])
+	while (tmp_map.array[i])
 	{
-		if (tet->figure[i] == tet->value)
+		if (tmp_map.array[i] == tet->value)
 		{
 			if (*map.array != '.')
 				return (-1);
-			*map.array = tet->figure[i];
+			*map.array = tmp_map.array[i];
 		}
-		if (tet->figure[i] == '\n')
+		if (tmp_map.array[i] == '\n')
 		{
 			map.array = map.array + map.size - 4;
-			if (map.array > (tmp_map + map.map_size))
-				return (test_end(tet->figure + i));
+			if (map.array > (tmp_map.array + map.map_size))
+				return (test_end(tmp_map.array + i));
 		}
 		i++;
 		map.array++;

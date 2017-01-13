@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/13 18:44:41 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 20:56:26 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,26 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "fillit_struct.h"
 # include "libft/libft.h"
 # include <stdio.h> // temporary, to test function, don't forget to erase with all the printf !!
 
-typedef	struct		s_tetri
-{
-	unsigned int	coord[4][2];
-	char			value;
-	struct s_tetri	*next;
-}					t_tetri;
 
-typedef	struct		s_map
-{
-	size_t			size;
-	size_t			map_size;
-	char			*array;
-}					t_map;
-
-t_tetri				*read_tetri(int fd);
-int					check_format(char *str);
-int					check_tetri(char *str);
-int					check_valid(char *str);
-void				organize(t_tetri *tet);
-size_t				tet_min_xy(t_tetri *tet, int xy);
-void				mv_upleft(t_tetri *tet, size_t *min);
-int					calc_min_size(t_tetri *tet);
-void				solve(t_tetri *tet);
-t_map				initmap(size_t	size, t_tetri *tet);
-char				tet_value(size_t i, t_tetri *tet, size_t size);
-int					backtracker(t_map map, t_tetri *tet, int flag);
-void				erase_tetri(char *array, t_tetri *tet);
-int					put_tetri(t_map map, t_tetri *tet, int pos);
-void				print_map(char **map);
-void				free_tetri(t_tetri *tetri);
-void				add_tetri(t_tetri *tetri, t_tetri *new);
+t_tetri		*read_tetri(int fd);
+int			check_format(char *str);
+int			check_tetri(char *str);
+int			check_valid(char *str);
+void		organize(t_tetri *tet);
+size_t		tet_min_xy(t_tetri *tet, int xy);
+void		mv_upleft(t_tetri *tet, size_t *min);
+int			calc_min_size(t_tetri *tet);
+void		solve(t_tetri *tet);
+t_map		initmap(t_map *map, size_t	size, t_tetri *tet);
+char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord);
+int			backtracker(t_map map, t_tetri *tet, int flag);
+void		erase_tetri(char *array, t_tetri *tet);
+int			put_tetri(t_map map, t_tetri *tet, int pos);
+void		print_map(char **map);
+void		free_tetri(t_tetri *tetri);
+void		add_tetri(t_tetri *tetri, t_tetri *new);
 #endif

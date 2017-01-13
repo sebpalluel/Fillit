@@ -6,23 +6,16 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 18:59:53 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/13 19:21:41 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 20:33:13 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		*ft_int2Dto1D(int **coord, size_t num_coord, size_t tab_width)
+size_t		ft_int2Dto1D(int **coord, size_t num_coord, size_t tab_width)
 {
-	size_t	count;
-	size_t	*tab;
+	size_t	index;
 
-	count = 0;
-	tab = (size_t *)ft_memalloc(num_coord);
-	while (count < num_coord)
-	{
-		tab[count] = coord[count][1] * tab_width + coord[count][0];
-		count++;
-	}
-	return (tab);
+	index = coord[num_coord][1] * tab_width + coord[num_coord][0];
+	return (index);
 }

@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/13 17:41:52 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 18:23:48 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_valid(char *str)
 	return (check_format(str) && check_tetri(str));
 }
 
-t_list	*read_tetri(int fd)
+t_tetri *read_tetri(int fd)
 {
 	char		*buffer;
 	char		carac;
@@ -67,4 +67,5 @@ t_list	*read_tetri(int fd)
 		add_tetri(create_tetri(buffer, carac));
 		carac++;
 	}
+	return  (tetri);
 }

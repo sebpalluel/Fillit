@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/13 20:56:26 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 21:01:07 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord);
 int			backtracker(t_map map, t_tetri *tet, int flag);
 void		erase_tetri(char *array, t_tetri *tet);
 int			put_tetri(t_map map, t_tetri *tet, int pos);
+int			test_end(char *tmp_map);
 void		print_map(char **map);
 void		free_tetri(t_tetri *tetri);
 void		add_tetri(t_tetri *tetri, t_tetri *new);

@@ -6,11 +6,10 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/13 17:40:47 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 18:22:10 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "fillit.h"
 
 t_tetri		create_tetri(char *str, char carac)
@@ -39,4 +38,22 @@ t_tetri		create_tetri(char *str, char carac)
 	}
 	tetri.value = carac;
 	return (new);
+}
+
+void	add_tetri(t_tetri *tetri, t_tetri *new)
+{
+	t_tetri	*tmp;
+
+	tmp = tetri;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
+void	free_tetri(t_tetri *tetri)
+{
+	t_tetri	*tmp;
+	tmp = tetri->next;
+	free(tetri);
+	free_tetri(tmp);
 }

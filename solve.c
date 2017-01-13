@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/13 18:27:38 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/13 18:37:30 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_map		initmap(size_t size, t_tetri *tet)
 		{
 			if (tet == NULL)
 				map.array[i] = '.';
+			else
+				map.array[i] = tet_value(i, tet);
 		}
 		i++;
 	}
@@ -54,6 +56,7 @@ t_map		initmap(size_t size, t_tetri *tet)
 
 char		tet_value(size_t i, t_tetri *tet)
 {
+
 }
 
 int			backtracker(t_map map, t_tetri *tet, int flag)
@@ -100,7 +103,7 @@ int		put_tetri(t_map map, t_tetri *tet, int pos)
 	t_map	tmp_map;
 
 	i = 0;
-	tmp_map = initmap(map.size);
+	tmp_map = initmap(map.size, tet);
 	map.array = map.array + pos;
 	while (tmp_map.array[i])
 	{
@@ -120,6 +123,6 @@ int		put_tetri(t_map map, t_tetri *tet, int pos)
 		map.array++;
 	}
 	ft_putstr("\x1b[43;30m");
-	printf("pos : %d, size : %lu, put piece :\n%s\n",pos,map.size,tmp_map);
+	printf("pos : %d, size : %lu, put piece :\n%s\n",pos,map.size,tmp_map.array);
 	return (0);
 }

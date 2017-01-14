@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/14 20:09:03 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/14 20:22:03 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		solve(t_tetri *tet)
 	size_t	size;
 	size_t	unsolved;
 
-	size = calc_min_size(tet) - 1;
+	size = calc_min_square(tet) - 1;
 	unsolved = 1;
 	while (unsolved)
 	{

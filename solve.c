@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/14 15:17:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/14 18:00:26 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
 		return ('.');
 }
 
-int			backtracker(t_map *map, t_tetri *tet, int flag)
+int			backtracker(t_map *map, t_tetri *tet, int erase)
 {
 	int		pos;
 
@@ -79,15 +79,12 @@ int			backtracker(t_map *map, t_tetri *tet, int flag)
 		return (print_map(map->array));
 	while (pos < (int)ft_strlen(map->array))
 	{
-		if (flag)
-		{
+		if (erase)
 			erase_tetri(map->array, tet);
-			flag = 0;
-		}
-		if ((flag = put_tetri(map, tet, pos)) == 0)
+		if ((erase = put_tetri(map, tet, pos)) == 0)
 		{
-			ft_putstr("\x1b[m");
-			if (backtracker(map, tet->next, flag) == 0)
+			ft_putstr_fd("\x1b[m", 2);
+			if (backtracker(map, tet->next, erase) == 0)
 				return (1);
 		}
 		pos++;
@@ -109,13 +106,17 @@ int		put_tetri(t_map *map, t_tetri *tet, int pos)
 	{
 		if (tmp_map.array[i] == tet->value)
 		{
-			if (*map->array != '.')
-				return (-1);
-			*map->array = tmp_map.array[i];
-		}
-		if (tmp_map.array[i] == '\n')
-		{
-			map->array = map->array + map->size - 4;
+			if (*map->array == '.')
+				*map->array = tmp_map.array[i];
+			else
+			{
+				ft_putstr_fd("\x1b[42;30m", 2);
+				ft_putstr_fd("not empty\n", 2);
+				return (1);
+			}
+			if (tmp_map.array[i] == '\n')
+
+				map->array = map->array + map->size - 4;
 			if (map->array > (tmp_map.array + map->map_size))
 				return (test_end(tmp_map.array + i));
 		}

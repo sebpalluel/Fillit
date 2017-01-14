@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:40:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/14 15:29:48 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/14 18:00:02 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	erase_tetri(char *array, t_tetri *tet)
 			*array = '.';
 		array++;
 	}
-	ft_putstr("\x1b[41;30m erase\n");
+	ft_putstr_fd("\x1b[41;30m erase\n", 2);
 }
 
 int		test_end(char *tmp_map)
@@ -29,14 +29,14 @@ int		test_end(char *tmp_map)
 	{
 		if (*tmp_map != '\n' && *tmp_map != '.')
 		{
-			ft_putstr("\x1b[46;30m");
-			ft_putstr("test_end_fail\n");
-			return (-1);
+			ft_putstr_fd("\x1b[46;30m", 2);
+			ft_putstr_fd("test_end_fail\n", 2);
+			return (2);
 		}
 		tmp_map++;
 	}
-	ft_putstr("\x1b[45;30m");
-	ft_putstr("test_end_succeed\n");
+	ft_putstr_fd("\x1b[45;30m", 2);
+	ft_putstr_fd("test_end_succeed\n", 2);
 	return (0);
 }
 

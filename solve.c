@@ -6,14 +6,15 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/13 21:00:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/14 15:17:13 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
 void		solve(t_tetri *tet)
 {
-	t_map	map;
+	t_map	*map;
 	size_t	size;
 	size_t	unsolved;
 
@@ -23,12 +24,12 @@ void		solve(t_tetri *tet)
 	{
 		size++;
 		ft_bzero(&map, sizeof(t_map));
-		map.size = size;
-		map.map_size = (map.size * map.size) + map.size;
-		map.array = (char *)ft_memalloc(map.map_size + 1);
-		initmap(&map, size, NULL);
+		map->size = size;
+		map->map_size = (map->size * map->size) + map->size;
+		map->array = (char *)ft_memalloc(map->map_size + 1);
+		initmap(map, size, NULL);
 		unsolved = backtracker(map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
-		free(map.array);
+		free(map->array);
 	}
 }
 
@@ -75,7 +76,7 @@ int			backtracker(t_map *map, t_tetri *tet, int flag)
 
 	pos = 0;
 	if (tet == NULL)
-		return (print_result(tet));
+		return (print_map(map->array));
 	while (pos < (int)ft_strlen(map->array))
 	{
 		if (flag)
@@ -94,56 +95,34 @@ int			backtracker(t_map *map, t_tetri *tet, int flag)
 	return (0);
 }
 
-void	erase_tetri(char *array, t_tetri *tet)
-{
-	while (*array)
-	{
-		if (*array == tet->value)
-		{
-			*array = '.';
-		}
-		array++;
-	}
-	ft_putstr("\x1b[41;30m erase\n");
-}
 
-int		put_tetri(t_map map, t_tetri *tet, int pos)
+
+int		put_tetri(t_map *map, t_tetri *tet, int pos)
 {
 	int		i;
 	t_map	tmp_map;
 
 	i = 0;
-	initmap(&tmp_map, map.size, tet);
-	map.array = map.array + pos;
+	initmap(&tmp_map, map->size, tet);
+	map->array = map->array + pos;
 	while (tmp_map.array[i])
 	{
 		if (tmp_map.array[i] == tet->value)
 		{
-			if (*map.array != '.')
+			if (*map->array != '.')
 				return (-1);
-			*map.array = tmp_map.array[i];
+			*map->array = tmp_map.array[i];
 		}
 		if (tmp_map.array[i] == '\n')
 		{
-			map.array = map.array + map.size - 4;
-			if (map.array > (tmp_map.array + map.map_size))
+			map->array = map->array + map->size - 4;
+			if (map->array > (tmp_map.array + map->map_size))
 				return (test_end(tmp_map.array + i));
 		}
 		i++;
-		map.array++;
+		map->array++;
 	}
 	ft_putstr("\x1b[43;30m");
-	printf("pos : %d, size : %lu, put piece :\n%s\n",pos,map.size,tmp_map.array);
-	return (0);
-}
-
-int		test_end(char *tmp_map)
-{
-	while (*tmp_map)
-	{
-		if (*tmp_map != '\n' && *tmp_map != '.')
-			return (-1);
-		tmp_map++;
-	}
+	printf("pos : %d, size : %lu, put piece :\n%s\n",pos,map->size,tmp_map.array);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:40:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/14 14:12:37 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/14 15:29:48 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,20 @@ int		test_end(char *tmp_map)
 	while (*tmp_map)
 	{
 		if (*tmp_map != '\n' && *tmp_map != '.')
+		{
+			ft_putstr("\x1b[46;30m");
+			ft_putstr("test_end_fail\n");
 			return (-1);
+		}
 		tmp_map++;
 	}
+	ft_putstr("\x1b[45;30m");
+	ft_putstr("test_end_succeed\n");
 	return (0);
 }
 
 int		print_map(char *map)
 {
-	ft_putstr_fd(1, map);
+	ft_putstr_fd(map, 1);
 	return(1);
 }

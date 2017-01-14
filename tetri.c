@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/14 19:10:12 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/14 20:18:57 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,13 @@ void	add_tetri(t_tetri *tetri, t_tetri *new)
 void	free_tetri(t_tetri *tetri)
 {
 	t_tetri	*tmp;
-	tmp = tetri->next;
-	free(tetri);
-	free_tetri(tmp);
+
+	tmp = tetri;
+	while (tmp)
+	{
+		tetri = tmp;
+		tmp = tmp->next;
+		free(tetri->coord);
+		free_tetri(tetri);
+	}
 }

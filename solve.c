@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/14 18:00:26 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/14 20:09:03 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void		solve(t_tetri *tet)
 		map->size = size;
 		map->map_size = (map->size * map->size) + map->size;
 		map->array = (char *)ft_memalloc(map->map_size + 1);
-		initmap(map, size, NULL);
+		initmap(map, NULL);
 		unsolved = backtracker(map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
 		free(map->array);
 	}
 }
 
-void	initmap(t_map *map, size_t size, t_tetri *tet)
+void	initmap(t_map *map, t_tetri *tet)
 {
 	size_t 	i;
 	size_t	num_coord;
@@ -92,15 +92,13 @@ int			backtracker(t_map *map, t_tetri *tet, int erase)
 	return (0);
 }
 
-
-
 int		put_tetri(t_map *map, t_tetri *tet, int pos)
 {
 	int		i;
 	t_map	tmp_map;
 
 	i = 0;
-	initmap(&tmp_map, map->size, tet);
+	initmap(&tmp_map, tet);
 	map->array = map->array + pos;
 	while (tmp_map.array[i])
 	{

@@ -6,13 +6,13 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/13 18:22:10 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/14 19:10:12 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-t_tetri		create_tetri(char *str, char carac)
+t_tetri		*create_tetri(char *str, char carac)
 {
 	int			i;
 	int			j;
@@ -30,13 +30,13 @@ t_tetri		create_tetri(char *str, char carac)
 			j++;
 		if (str[i] == '#')
 		{
-			new.coord[current].x = (i % 5);
-			new.coord[current].y = j;
+			new->coord[current][0] = (i % 5);
+			new->coord[current][1] = j;
 			current++;
 		}
 		i++;
 	}
-	tetri.value = carac;
+	new->value = carac;
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/14 19:09:16 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/14 19:25:11 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h> // temporary, to test function, don't forget to erase with all the printf !!
 
 
-t_tetri		*read_tetri(int fd);
+int			read_tetri(t_tetri **tetri, int fd);
 int			check_format(char *str);
 int			check_tetri(char *str);
 int			check_valid(char *str);

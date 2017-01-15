@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/14 22:11:52 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 15:43:26 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int			put_tetri(t_map *map, t_tetri *tet, int pos);
 int			test_end(char *tmp_map);
 int			print_map(char *map);
 void		free_tetri(t_tetri *tetri);
-void		add_tetri(t_tetri *tetri, t_tetri *new);
+void		add_tetri(t_tetri **tetri, t_tetri *new);
 t_tetri		*create_tetri(char *str, char carac);
 #endif

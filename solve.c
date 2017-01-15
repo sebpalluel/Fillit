@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/15 20:01:08 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 21:54:30 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		solve(t_tetri *tet, size_t numtetri)
 		ft_bzero(map, sizeof(t_map));
 		map->size = size;
 		map->map_size = (map->size * map->size) + map->size;
-		map->array = (char *)ft_memalloc(sizeof(map->map_size + 1));
+		map->array = ft_strnew(map->map_size + 1);
 		initmap(map->array, map->size, NULL);
 		print_map(map->array);
 		//printf("& : %p\n%s\n",map->array, map->array);
@@ -102,31 +102,33 @@ int		put_tetri(t_map *map, t_tetri *tet, int pos)
 	char	*tmp_map;
 
 	i = 0;
-	initmap(tmp_map, map->size, tet);
+	tmp_map = map->array;
+	//initmap(tmp_map, map->size, tet);
 	ft_putstr("test\n");
 	map->array = map->array + pos;
-	while (tmp_map[i])
-	{
-		if (tmp_map[i] == tet->value)
-		{
-			if (*map->array == '.')
-				*map->array = tmp_map[i];
-			else
-			{
-				ft_putstr_fd("\x1b[42;30m", 2);
-				ft_putstr_fd("not empty\n", 2);
-				return (1);
-			}
-			if (tmp_map[i] == '\n')
-
-				map->array = map->array + map->size - 4;
-			if (map->array > (tmp_map + map->map_size))
-				return (test_end(tmp_map + i));
-		}
-		i++;
-		map->array++;
-	}
+	/*while (tmp_map[i])
+	  {
+	  if (tmp_map[i] == tet->value)
+	  {
+	  if (*map->array == '.')
+	 *map->array = tmp_map[i];
+	 else
+	 {
+	 ft_putstr_fd("\x1b[42;30m", 2);
+	 ft_putstr_fd("not empty\n", 2);
+	 return (1);
+	 }
+	 if (tmp_map[i] == '\n')
+	 {
+	 map->array = map->array + map->size - 4;
+	 if (map->array > (tmp_map + map->map_size))
+	 return (test_end(tmp_map + i));
+	 }
+	 }
+	 i++;
+	 map->array++;
+	 }*/
 	ft_putstr("\x1b[43;30m");
-	printf("pos : %d, size : %lu, put piece :\n%s\n",pos,map->size,tmp_map);
+	printf("pos : %d, tet : %c, put piece :\n%s\n",pos,tet->value,tmp_map);
 	return (0);
 }

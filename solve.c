@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/15 19:14:12 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 20:01:08 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		solve(t_tetri *tet, size_t numtetri)
 		map->size = size;
 		map->map_size = (map->size * map->size) + map->size;
 		map->array = (char *)ft_memalloc(sizeof(map->map_size + 1));
-		initmap(map->array, map->size, map->map_size, NULL);
+		initmap(map->array, map->size, NULL);
 		print_map(map->array);
 		//printf("& : %p\n%s\n",map->array, map->array);
 		unsolved = backtracker(map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
@@ -37,14 +37,14 @@ void		solve(t_tetri *tet, size_t numtetri)
 	}
 }
 
-void	initmap(char *map, size_t size, size_t map_size, t_tetri *tet)
+void	initmap(char *map, size_t size, t_tetri *tet)
 {
 	size_t 	i;
 	size_t	num_coord;
 
 	i = 0;
 	num_coord = 0;
-	while (i < map_size)
+	while (i < (size * size) + size)
 	{
 		if (((i + 1) % (size + 1)) == 0)
 			map[i] = '\n';
@@ -102,8 +102,8 @@ int		put_tetri(t_map *map, t_tetri *tet, int pos)
 	char	*tmp_map;
 
 	i = 0;
-	tmp_map = map->array;
-	initmap(tmp_map, map->size, map->map_size, tet);
+	initmap(tmp_map, map->size, tet);
+	ft_putstr("test\n");
 	map->array = map->array + pos;
 	while (tmp_map[i])
 	{

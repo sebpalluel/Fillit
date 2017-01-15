@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/15 18:23:07 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 18:41:50 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,25 @@
 
 void		solve(t_tetri *tet, size_t numtetri)
 {
-	t_map	map;
+	t_map	*map;
 	size_t	size;
 	size_t	unsolved;
 
 	size = calc_min_square(numtetri) - 1;
 	unsolved = 1;
-	//map = ft_memalloc(sizeof(t_map));	
+	map = ft_memalloc(sizeof(t_map));
 	while (unsolved)
 	{
 		size++;
-		ft_bzero(&map, sizeof(t_map));
-		map.size = size;
-		map.map_size = (map.size * map.size) + map.size;
-		map.array = (char *)ft_memalloc(sizeof(map.map_size + 1));
-		initmap(&map, NULL);
-		printf("& : %p\n%s\n",map.array, map.array);
-		unsolved = backtracker(&map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
+		ft_bzero(map, sizeof(t_map));
+		map->size = size;
+		map->map_size = (map->size * map->size) + map->size;
+		map->array = (char *)ft_memalloc(sizeof(map->map_size + 1));
+		initmap(map, NULL);
+		printf("& : %p\n%s\n",map->array, map->array);
+		unsolved = backtracker(map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
 		ft_putstr("afterbacktack\n");
-		//printf("& : %p\n%s\n",map.array, map.array);
-		free(map.array);
+		free(map->array);
 	}
 }
 
@@ -46,7 +45,7 @@ void	initmap(t_map *map, t_tetri *tet)
 	num_coord = 0;
 	while (i < map->map_size)
 	{
-		if ((i % map->size) == 0)
+		if (((i + 1) % (map->size + 1)) == 0)
 			map->array[i] = '\n';
 		else
 		{
@@ -58,7 +57,6 @@ void	initmap(t_map *map, t_tetri *tet)
 		i++;
 	}
 	map->array[i] = '\0';
-	printf("%s",map->array);
 }
 
 char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)

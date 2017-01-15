@@ -6,23 +6,27 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/15 17:05:11 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 18:17:11 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	organize(t_tetri *tet)
+size_t	organize(t_tetri *tet)
 {
 	size_t	min[2];
+	size_t	counter;
 
+	counter = 0;
 	while (tet != NULL)
 	{
 		min[0] = tet_min_xy(tet, 0);
 		min[1] = tet_min_xy(tet, 1);
 		mv_upleft(tet, min);
 		tet = tet->next;
+		counter++;
 	}
+	return (counter - 1);
 }
 
 size_t	tet_min_xy(t_tetri *tet, int xy)
@@ -57,12 +61,11 @@ void	mv_upleft(t_tetri *tet, size_t *min)
 	}
 }
 
-int		calc_min_square(t_tetri *tet)
+size_t	calc_min_square(size_t numtetri)
 {
-	int numtetri;
-	int numblocks;
+	size_t numblocks;
 
-	numtetri = ft_lstlen((t_list *)tet);
 	numblocks = numtetri * 4;
+	printf("sqrt_square %d",ft_sqrt(numblocks));
 	return (ft_sqrt(numblocks));
 }

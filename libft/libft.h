@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 15:50:29 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/13 20:33:05 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 18:09:57 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft_struct.h"
+# define MAX_INT 2147483647
+# define MIN_INT -2147483648
 
 void	ft_putchar(char c);
 void	ft_putendl(char const *s);

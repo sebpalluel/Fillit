@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/15 18:17:11 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 18:23:28 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ size_t	calc_min_square(size_t numtetri)
 	size_t numblocks;
 
 	numblocks = numtetri * 4;
-	printf("sqrt_square %d",ft_sqrt(numblocks));
 	return (ft_sqrt(numblocks));
 }

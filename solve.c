@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/15 18:41:50 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 19:14:12 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,35 +28,36 @@ void		solve(t_tetri *tet, size_t numtetri)
 		map->size = size;
 		map->map_size = (map->size * map->size) + map->size;
 		map->array = (char *)ft_memalloc(sizeof(map->map_size + 1));
-		initmap(map, NULL);
-		printf("& : %p\n%s\n",map->array, map->array);
+		initmap(map->array, map->size, map->map_size, NULL);
+		print_map(map->array);
+		//printf("& : %p\n%s\n",map->array, map->array);
 		unsolved = backtracker(map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
 		ft_putstr("afterbacktack\n");
 		free(map->array);
 	}
 }
 
-void	initmap(t_map *map, t_tetri *tet)
+void	initmap(char *map, size_t size, size_t map_size, t_tetri *tet)
 {
 	size_t 	i;
 	size_t	num_coord;
 
 	i = 0;
 	num_coord = 0;
-	while (i < map->map_size)
+	while (i < map_size)
 	{
-		if (((i + 1) % (map->size + 1)) == 0)
-			map->array[i] = '\n';
+		if (((i + 1) % (size + 1)) == 0)
+			map[i] = '\n';
 		else
 		{
 			if (tet == NULL)
-				map->array[i] = '.';
+				map[i] = '.';
 			else
-				map->array[i] = tet_value(i, tet, map->size + 1, num_coord);
+				map[i] = tet_value(i, tet, size + 1, num_coord);
 		}
 		i++;
 	}
-	map->array[i] = '\0';
+	map[i] = '\0';
 }
 
 char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
@@ -98,33 +99,34 @@ int			backtracker(t_map *map, t_tetri *tet, int erase)
 int		put_tetri(t_map *map, t_tetri *tet, int pos)
 {
 	int		i;
-	t_map	tmp_map;
+	char	*tmp_map;
 
 	i = 0;
-	initmap(&tmp_map, tet);
+	tmp_map = map->array;
+	initmap(tmp_map, map->size, map->map_size, tet);
 	map->array = map->array + pos;
-	while (tmp_map.array[i])
+	while (tmp_map[i])
 	{
-		if (tmp_map.array[i] == tet->value)
+		if (tmp_map[i] == tet->value)
 		{
 			if (*map->array == '.')
-				*map->array = tmp_map.array[i];
+				*map->array = tmp_map[i];
 			else
 			{
 				ft_putstr_fd("\x1b[42;30m", 2);
 				ft_putstr_fd("not empty\n", 2);
 				return (1);
 			}
-			if (tmp_map.array[i] == '\n')
+			if (tmp_map[i] == '\n')
 
 				map->array = map->array + map->size - 4;
-			if (map->array > (tmp_map.array + map->map_size))
-				return (test_end(tmp_map.array + i));
+			if (map->array > (tmp_map + map->map_size))
+				return (test_end(tmp_map + i));
 		}
 		i++;
 		map->array++;
 	}
 	ft_putstr("\x1b[43;30m");
-	printf("pos : %d, size : %lu, put piece :\n%s\n",pos,map->size,tmp_map.array);
+	printf("pos : %d, size : %lu, put piece :\n%s\n",pos,map->size,tmp_map);
 	return (0);
 }

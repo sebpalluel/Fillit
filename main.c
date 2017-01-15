@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/15 16:47:25 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 16:55:06 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		main(int argc, char **argv)
 		ft_putstr_fd("error\n",1);
 		return (0);
 	}
-	printf("testtetri : %d\n",tetri->coord[0][0]);
 	organize(tetri);
 	solve(tetri);
 	free_tetri(tetri);

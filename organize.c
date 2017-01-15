@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/13 17:01:14 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/15 16:55:39 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	organize(t_tetri *tet)
 
 	while (tet != NULL)
 	{
+		printf("organize %c\n",tet->value);
 		min[0] = tet_min_xy(tet, 0);
 		min[1] = tet_min_xy(tet, 1);
+		printf("min x : %lu, min y : %lu\n",min[0],min[1]);
 		mv_upleft(tet, min);
 		tet = tet->next;
 	}

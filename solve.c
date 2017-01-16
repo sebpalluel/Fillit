@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/15 21:54:30 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 12:37:26 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ void		solve(t_tetri *tet, size_t numtetri)
 		map->map_size = (map->size * map->size) + map->size;
 		map->array = ft_strnew(map->map_size + 1);
 		initmap(map->array, map->size, NULL);
-		print_map(map->array);
-		//printf("& : %p\n%s\n",map->array, map->array);
+		print_map(map->array); // new map debug
 		unsolved = backtracker(map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
 		ft_putstr("afterbacktack\n");
-		free(map->array);
+		free(map->array); // error here
 	}
 }
 
@@ -76,12 +75,12 @@ char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
 
 int			backtracker(t_map *map, t_tetri *tet, int erase)
 {
-	int		pos;
+	size_t		pos;
 
 	pos = 0;
 	if (tet == NULL)
 		return (print_map(map->array));
-	while (pos < (int)ft_strlen(map->array))
+	while (pos < ft_strlen(map->array))
 	{
 		if (erase)
 			erase_tetri(map->array, tet);
@@ -96,7 +95,7 @@ int			backtracker(t_map *map, t_tetri *tet, int erase)
 	return (0);
 }
 
-int		put_tetri(t_map *map, t_tetri *tet, int pos)
+int		put_tetri(t_map *map, t_tetri *tet, size_t pos)
 {
 	int		i;
 	char	*tmp_map;
@@ -129,6 +128,6 @@ int		put_tetri(t_map *map, t_tetri *tet, int pos)
 	 map->array++;
 	 }*/
 	ft_putstr("\x1b[43;30m");
-	printf("pos : %d, tet : %c, put piece :\n%s\n",pos,tet->value,tmp_map);
+	printf("pos : %lu, tet : %c, put piece :\n%s\n",pos,tet->value,tmp_map);
 	return (0);
 }

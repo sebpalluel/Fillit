@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 18:59:53 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/13 20:33:13 by psebasti         ###   ########.fr       */
+/*   Created: 2017/01/16 22:26:37 by psebasti          #+#    #+#             */
+/*   Updated: 2017/01/16 22:26:44 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ size_t		ft_int2Dto1D(int **coord, size_t num_coord, size_t tab_width)
 {
 	size_t	index;
 
-	index = coord[num_coord][1] * tab_width + coord[num_coord][0];
+	index = (size_t)(coord[num_coord][1] * tab_width + coord[num_coord][0]);
 	return (index);
 }

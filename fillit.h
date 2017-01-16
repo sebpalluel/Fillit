@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/16 20:20:28 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 23:20:30 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "fillit_struct.h"
 # include "libft/libft.h"
 # include <stdio.h> // temporary, to test function, don't forget to erase with all the printf !!
-
+# define NUMBLOCKS 4
 
 int			read_tetri(t_tetri **tetri, int fd);
 int			check_format(char *str);

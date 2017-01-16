@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 15:50:29 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 20:12:56 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 22:28:29 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ char	**ft_strsplit(char const *s, char c);
 size_t	ft_intlen(int *array);
 int		ft_intmin(int *array);
 int		ft_intmax(int *array);
-size_t	ft_int2Dto1D(int **coord, size_t num_coord, \
-		size_t tab_width);
+size_t	ft_int2Dto1D(int **coord, size_t num_coord, size_t tab_width);
 
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void	*ft_memchr(const void *str, int c, size_t n);

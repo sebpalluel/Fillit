@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 20:39:09 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 23:25:45 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ size_t		solve(t_tetri *tet, size_t numtetri)
 	t_map	*map;
 	size_t	size;
 	size_t	unsolved;
-	unsigned int **tmp_coord;
+	unsigned int **tmp_coord = NULL;
 
 	size = calc_min_square(numtetri) - 1;
 	unsolved = -1;
 	if (!(map = ft_memalloc(2 * sizeof(t_map))) \
-			|| !(tmp_coord = (unsigned int **)ft_newtab(2, 4)) ||\
+			|| !(tmp_coord = (unsigned int **)ft_newtab(4, 2)) ||\
 			!(map[1].array = ft_strnew(4 * 4 + 1)))
 		return (0);
 	while (unsolved != 0)
@@ -35,7 +35,10 @@ size_t		solve(t_tetri *tet, size_t numtetri)
 		ft_putstr("afterbacktack\n");
 		unsolved = 0; // stop debug
 	}
+	//char tmp[4][2];
+	//tmp_coord[4][0] = 2;
 	ft_freetab((char **)tmp_coord);
+	ft_putstr("testafterbacktack\n");
 	free(map);
 	return (1);
 }
@@ -73,12 +76,19 @@ size_t		initmap_result(t_map *map, size_t size)
 	return (0);
 }
 
+size_t		int2Dto1D(unsigned int coord[4][2], size_t num_coord, size_t tab_width)
+{
+	size_t	index;
+
+	index = (size_t)(coord[num_coord][1] * tab_width + coord[num_coord][0]);
+	return (index);
+}
+
 char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
 {
 	size_t	match_block;
 
-	printf("before_bug3 %d\n", tet->coord[0][1]);
-	match_block = ft_int2Dto1D((int **)tet->coord, num_coord, size + 1);
+	match_block = int2Dto1D(tet->coord, num_coord, size);
 	if (i == match_block && num_coord < 4)
 	{
 		num_coord++;
@@ -101,14 +111,15 @@ void		populate_tetri(char *tet_map, t_tetri *tet, unsigned int **coord)
 	size_t	xy;
 
 	i = 0;
-	xy = 0;
 	ft_bzero(tet_map, 16);
 	initmap(tet_map, 4, tet);
-	printf("before_bug2\n");
 	while (i < 4)
 	{
+		xy = 0;
 		while (xy < 2)
 		{
+
+			printf("before_bug2\n %lu %lu\n",i,xy);
 			coord[i][xy] = tet->coord[i][xy];
 			xy++;
 		}

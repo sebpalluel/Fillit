@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/15 17:01:26 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 15:05:24 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_tetri		*create_tetri(char *str, char carac)
 		i++;
 	}
 	new->value = carac;
+	printf("valid %c\n",new->value);
 	return (new);
 }
 
@@ -45,7 +46,7 @@ void	add_tetri(t_tetri **tetri, t_tetri *new)
 	t_tetri *tmp;
 
 	tmp = *tetri;
-	if (*tetri == NULL)
+	if (tetri != NULL && *tetri == NULL)
 		*tetri = new;
 	else
 	{

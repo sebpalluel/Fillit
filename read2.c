@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/15 15:43:56 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 15:07:12 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int 	read_tetri(t_tetri **tetri, int fd)
 	buffer = ft_strnew(21);
 	carac = 'A';
 	last_tetri = 0;
+	*tetri = NULL;
 	while ((ret = read(fd, buffer, 21)))
 	{
 		printf("%s",buffer);
@@ -94,7 +95,6 @@ int 	read_tetri(t_tetri **tetri, int fd)
 			free_tetri(*tetri);
 			return (1);
 		}
-		printf("valid %c\n",carac);
 		add_tetri(tetri, create_tetri(buffer, carac));
 		carac++;
 	}

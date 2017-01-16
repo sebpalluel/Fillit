@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_freetab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/19 16:12:55 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/15 15:40:45 by psebasti         ###   ########.fr       */
+/*   Created: 2017/01/16 18:44:35 by psebasti          #+#    #+#             */
+/*   Updated: 2017/01/16 18:53:27 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+void	ft_freetab(char **tab)
 {
-	if (new)
-	{
-		new->next = *alst;
-		*alst = new;
-	}
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		ft_memdel((void *)&tab[i++]);
+	ft_memdel((void *)&tab);
 }

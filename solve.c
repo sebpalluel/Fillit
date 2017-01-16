@@ -6,11 +6,19 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 12:37:26 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 14:08:32 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+void		initmap_result(t_map *map, size_t size)
+{
+	map->size = size;
+	map->map_size = (map->size * map->size) + map->size;
+	map->array = ft_strnew(map->map_size + 1);
+	initmap(map->array, map->size, NULL);
+}
 
 void		solve(t_tetri *tet, size_t numtetri)
 {
@@ -20,19 +28,17 @@ void		solve(t_tetri *tet, size_t numtetri)
 
 	size = calc_min_square(numtetri) - 1;
 	unsolved = 1;
-	map = ft_memalloc(sizeof(t_map));
-	while (unsolved)
+	map = ft_memalloc( 2 * sizeof(t_map));
+	map[1].array = ft_strnew(4 * 4 + 1);
+	while (unsolved != 0)
 	{
 		size++;
-		ft_bzero(map, sizeof(t_map));
-		map->size = size;
-		map->map_size = (map->size * map->size) + map->size;
-		map->array = ft_strnew(map->map_size + 1);
-		initmap(map->array, map->size, NULL);
-		print_map(map->array); // new map debug
+		initmap_result(&map[0], size);
+		//print_map(map[0].array); // new map debug
 		unsolved = backtracker(map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
 		ft_putstr("afterbacktack\n");
-		free(map->array); // error here
+		unsolved = 0; // stop debug
+		free(map[0].array); // error here
 	}
 }
 
@@ -78,33 +84,32 @@ int			backtracker(t_map *map, t_tetri *tet, int erase)
 	size_t		pos;
 
 	pos = 0;
-	if (tet == NULL)
-		return (print_map(map->array));
-	while (pos < ft_strlen(map->array))
+	//if (tet == NULL)
+	//	return (print_map(map[0].array));
+	while (pos < ft_strlen(map[0].array))
 	{
-		if (erase)
-			erase_tetri(map->array, tet);
-		if ((erase = put_tetri(map, tet, pos)) == 0)
+		if (erase == -2)
+			erase_tetri(map[0].array, tet);
+		if ((erase = put_tetri(map[0], tet, pos)) == 0)
 		{
 			ft_putstr_fd("\x1b[m", 2);
 			if (backtracker(map, tet->next, erase) == 0)
-				return (1);
+				return (0);
 		}
 		pos++;
 	}
-	return (0);
+	return (-1);
 }
 
-int		put_tetri(t_map *map, t_tetri *tet, size_t pos)
+int		put_tetri(t_map map, t_tetri *tet, size_t pos)
 {
 	int		i;
 	char	*tmp_map;
 
 	i = 0;
-	tmp_map = map->array;
+	tmp_map = map.array;
 	//initmap(tmp_map, map->size, tet);
-	ft_putstr("test\n");
-	map->array = map->array + pos;
+	map.array = map.array + pos;
 	/*while (tmp_map[i])
 	  {
 	  if (tmp_map[i] == tet->value)
@@ -128,6 +133,6 @@ int		put_tetri(t_map *map, t_tetri *tet, size_t pos)
 	 map->array++;
 	 }*/
 	ft_putstr("\x1b[43;30m");
-	printf("pos : %lu, tet : %c, put piece :\n%s\n",pos,tet->value,tmp_map);
+	printf("pos: %lu, size: %lu, tet: %c, put piece:\n%s",pos,map.size,tet->value,map.array);
 	return (0);
 }

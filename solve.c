@@ -6,32 +6,36 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 17:45:40 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 19:03:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void		solve(t_tetri *tet, size_t numtetri)
+size_t		solve(t_tetri *tet, size_t numtetri)
 {
 	t_map	*map;
 	size_t	size;
 	size_t	unsolved;
-	//	unsigned int tmp_coord[4][2];
+	unsigned int **tmp_coord;
 
 	size = calc_min_square(numtetri) - 1;
 	unsolved = -1;
-	map = ft_memalloc( 2 * sizeof(t_map));
-	map[1].array = ft_strnew(4 * 4 + 1);
+	if (initmap_coord(&map[1], tmp_coord))
+		return (0);
 	while (unsolved != 0)
 	{
 		size++;
-		initmap_result(&map[0], size);
+		if (initmap_result(&map[0], size))
+			return (0);
 		ft_putstr("\x1b[42;30m newgrid\n");
-		unsolved = backtracker(map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
+		unsolved = backtracker(map, tet, tmp_coord, unsolved);//here algo return 0 if solution not found, return 1 if solved it
 		ft_putstr("afterbacktack\n");
 		unsolved = 0; // stop debug
 	}
+	ft_freetab((char **)tmp_coord);
+	free(map);
+	return (1);
 }
 
 void	initmap(char *map, size_t size, t_tetri *tet)
@@ -57,12 +61,34 @@ void	initmap(char *map, size_t size, t_tetri *tet)
 	map[i] = '\0';
 }
 
-void		initmap_result(t_map *map, size_t size)
+size_t		initmap_coord(t_map *map, unsigned int **coord)
+{
+	size_t	i;
+
+	i = 0;
+	if (!(**coord = (unsigned int)ft_memalloc(4 * sizeof(*coord))))
+		return (1);
+	while (i < 4)
+	{
+		if(!(*coord[i] = (unsigned int)ft_memalloc(2 * sizeof(**coord))))
+			return (1);
+		i++;
+	}
+
+	if (!(map = ft_memalloc(2 * sizeof(t_map))))
+		return (0);
+	map[1].array = ft_strnew(4 * 4 + 1);
+	return (0);
+}
+
+size_t		initmap_result(t_map *map, size_t size)
 {
 	map->size = size;
 	map->map_size = (map->size * map->size) + map->size;
-	map->array = ft_strnew(map->map_size + 1);
+	if ((map->array = ft_strnew(map->map_size + 1)) == NULL)
+		return (1);
 	initmap(map->array, map->size, NULL);
+	return (0);
 }
 
 char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
@@ -79,30 +105,36 @@ char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
 		return ('.');
 }
 
-int			backtracker(t_map *map, t_tetri *tet, int erase)
+size_t		evaluate_new_pos_tetri(t_map *map, t_tetri *tet, \
+		unsigned int **coord, size_t pos)
+{
+
+
+}
+
+int			backtracker(t_map *map, t_tetri *tet, unsigned int **coord, \
+		int erase)
 {
 	size_t		pos;
 
 	pos = 0;
 	if (tet == NULL)
-	{
 		return (print_map(map[0].array));
-	}
 	while (pos < ft_strlen(map[0].array))
 	{
-		if (erase == -2)
-			erase_tetri(map[0].array, tet);
-		if ((erase = put_tetri(map, tet, pos)) == 0)
-		{ 
-			ft_putstr_fd("\x1b[m", 2);
-			if (backtracker(map, tet->next, erase) == 0)
-			{
-				return (0);
+		if (evaluate_new_pos_tetri(map, tet, coord, pos))
+		{
+			if (erase == -2)
+				erase_tetri(map[0].array, tet);
+			if ((erase = put_tetri(map, tet, pos)) == 0)
+			{ 
+				ft_putstr_fd("\x1b[m", 2);
+				if (backtracker(map, tet->next, coord, erase) == 0)
+					return (0);
 			}
 		}
 		pos++;
 	}
-	free(map[0].array); // error here
 	return (-1);
 }
 

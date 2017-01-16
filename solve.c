@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 14:08:32 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 15:45:30 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void		solve(t_tetri *tet, size_t numtetri)
 	size_t	unsolved;
 
 	size = calc_min_square(numtetri) - 1;
-	unsolved = 1;
+	unsolved = -1;
 	map = ft_memalloc( 2 * sizeof(t_map));
 	map[1].array = ft_strnew(4 * 4 + 1);
 	while (unsolved != 0)
 	{
 		size++;
 		initmap_result(&map[0], size);
-		//print_map(map[0].array); // new map debug
+		ft_putstr("\x1b[42;30m newgrid\n");
 		unsolved = backtracker(map, tet, unsolved);//here algo return 0 if solution not found, return 1 if solved it
 		ft_putstr("afterbacktack\n");
 		unsolved = 0; // stop debug
@@ -84,18 +84,22 @@ int			backtracker(t_map *map, t_tetri *tet, int erase)
 	size_t		pos;
 
 	pos = 0;
-	//if (tet == NULL)
-	//	return (print_map(map[0].array));
+	if (tet == NULL)
+	{
+		return (print_map(map[0].array));
+	}
 	while (pos < ft_strlen(map[0].array))
 	{
-		if (erase == -2)
-			erase_tetri(map[0].array, tet);
-		if ((erase = put_tetri(map[0], tet, pos)) == 0)
+		/*		if (erase == -2)
+				erase_tetri(map[0].array, tet);
+				if ((erase = put_tetri(map[0], tet, pos)) == 0)
+				{ */
+		ft_putstr_fd("\x1b[m", 2);
+		if (backtracker(map, tet->next, erase) == 0)
 		{
-			ft_putstr_fd("\x1b[m", 2);
-			if (backtracker(map, tet->next, erase) == 0)
-				return (0);
+			return (0);
 		}
+		//		}
 		pos++;
 	}
 	return (-1);

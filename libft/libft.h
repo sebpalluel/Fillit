@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 15:50:29 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 18:58:45 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 20:12:56 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	ft_memdel(void **ap);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memdup(const void *mem, size_t size);
 void	ft_freetab(char **tab);
+void	**ft_newtab(size_t height, size_t width);
 t_list	*ft_lstnew(void const *content, size_t content_size);
 void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void	ft_lstdel(t_list **alst, void (*del)(void *, size_t));

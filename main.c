@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/15 17:51:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 16:01:35 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int		main(int argc, char **argv)
 	}
 	numtetri = organize(tetri);
 	solve(tetri, numtetri);
-	free_tetri(tetri);
+	free_tetri(&tetri);
 	return (0);
 }

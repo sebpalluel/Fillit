@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/15 18:23:28 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 15:08:55 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	organize(t_tetri *tet)
 		tet = tet->next;
 		counter++;
 	}
-	return (counter - 1);
+	return (counter);
 }
 
 size_t	tet_min_xy(t_tetri *tet, int xy)

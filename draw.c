@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:40:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 15:45:09 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 15:52:34 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		test_end(char *tmp_map)
 
 int		print_map(char *map)
 {
-	printf("pintmap\n");
+	printf("printmap\n");
 	ft_putstr_fd(map, 1);
 	return(0);
 }

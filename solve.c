@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 15:45:30 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/16 15:52:36 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,16 @@ int			backtracker(t_map *map, t_tetri *tet, int erase)
 	}
 	while (pos < ft_strlen(map[0].array))
 	{
-		/*		if (erase == -2)
-				erase_tetri(map[0].array, tet);
-				if ((erase = put_tetri(map[0], tet, pos)) == 0)
-				{ */
-		ft_putstr_fd("\x1b[m", 2);
-		if (backtracker(map, tet->next, erase) == 0)
-		{
-			return (0);
+		if (erase == -2)
+			erase_tetri(map[0].array, tet);
+		if ((erase = put_tetri(map[0], tet, pos)) == 0)
+		{ 
+			ft_putstr_fd("\x1b[m", 2);
+			if (backtracker(map, tet->next, erase) == 0)
+			{
+				return (0);
+			}
 		}
-		//		}
 		pos++;
 	}
 	return (-1);

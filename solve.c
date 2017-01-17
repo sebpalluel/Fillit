@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 23:25:45 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/17 16:33:24 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,9 @@ size_t		solve(t_tetri *tet, size_t numtetri)
 			return (0);
 		ft_putstr("\x1b[42;30m newgrid\n");
 		unsolved = backtracker(map, tet, tmp_coord, unsolved);//here algo return 0 if solution not found, return 1 if solved it
-		ft_putstr("afterbacktack\n");
 		unsolved = 0; // stop debug
 	}
-	//char tmp[4][2];
-	//tmp_coord[4][0] = 2;
 	ft_freetab((char **)tmp_coord);
-	ft_putstr("testafterbacktack\n");
 	free(map);
 	return (1);
 }
@@ -59,7 +55,12 @@ void	initmap(char *map, size_t size, t_tetri *tet)
 			if (tet == NULL)
 				map[i] = '.';
 			else
+			{
 				map[i] = tet_value(i, tet, size + 1, num_coord);
+				if (map[i] != '.')
+					num_coord++;
+				printf("val: %c\n",map[i]);
+			}
 		}
 		i++;
 	}
@@ -89,11 +90,9 @@ char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
 	size_t	match_block;
 
 	match_block = int2Dto1D(tet->coord, num_coord, size);
+	printf("i: %lu match_block: %lu\n",i, match_block);
 	if (i == match_block && num_coord < 4)
-	{
-		num_coord++;
 		return (tet->value);
-	}
 	else 
 		return ('.');
 }
@@ -118,8 +117,6 @@ void		populate_tetri(char *tet_map, t_tetri *tet, unsigned int **coord)
 		xy = 0;
 		while (xy < 2)
 		{
-
-			printf("before_bug2\n %lu %lu\n",i,xy);
 			coord[i][xy] = tet->coord[i][xy];
 			xy++;
 		}
@@ -136,6 +133,7 @@ int			backtracker(t_map *map, t_tetri *tet, unsigned int **coord, \
 	if (tet == NULL)
 		return (print_map(map[0].array));
 	populate_tetri(map[1].array, tet, coord);
+	printf("tet : \n%s",map[1].array);
 	while (pos < ft_strlen(map[0].array))
 	{
 		//if (evaluate_new_pos_tetri(map, tet, coord, pos))

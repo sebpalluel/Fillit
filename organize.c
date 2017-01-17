@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 15:08:55 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/17 16:56:18 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ size_t	organize(t_tetri *tet)
 	return (counter);
 }
 
-size_t	tet_min_xy(t_tetri *tet, int xy)
+size_t	tet_min_xy(t_tetri *tet, size_t xy)
 {
-	int	array[4];
-	int i;
+	size_t	array[4];
+	size_t 	i;
 
 	i = 0;
 	while (i < 4)
@@ -40,7 +40,7 @@ size_t	tet_min_xy(t_tetri *tet, int xy)
 		array[i] = tet->coord[i][xy];
 		i++;
 	}
-	return ((size_t)ft_intmin(array));
+	return ((size_t)ft_intmin((int *)array));
 }
 
 void	mv_upleft(t_tetri *tet, size_t *min)
@@ -49,15 +49,15 @@ void	mv_upleft(t_tetri *tet, size_t *min)
 	int xy;
 
 	i = 0;
-	xy = 0;
-	while (xy < 2)
+	while (i < 4)
 	{
-		while (i < 4)
+		xy = 0;
+		while (xy < 2)
 		{
 			tet->coord[i][xy] -= min[xy];
-			i++;
+			xy++;
 		}
-		xy++;
+		i++;
 	}
 }
 

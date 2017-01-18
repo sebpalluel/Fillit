@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/16 16:08:24 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/18 14:51:08 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,29 @@ int		check_tetri(char *str)
 {
 	int		i;
 	int		contact;
+	int		num_blocks;
 
 	i = 0;
 	contact = 0;
+	num_blocks = 0;
 	while (i < 20)
 	{
 		if (str[i] == '#')
+		{
+			num_blocks++;
 			if (str[i + 1] == '#' || str[i + 5] == '#')
 				contact++;
+		}
 		i++;
 	}
-	return (contact == 3 || contact == 4);
-}
-
-int		check_four_blocks(char *str)
-{
-	int		blocks;
-	int		i;
-
-	blocks = 0;
-	i = 0;
-	while (i < 20)
-	{
-		if (str[i] == '#')
-			blocks++;
-		i++;
-	}
-	if (blocks == 4)
+	if ((contact == 3 || contact == 4) && (num_blocks == 4))
 		return (1);
 	return (0);
 }
 
 int		check_valid(char *str)
 {
-	return (check_format(str) && check_tetri(str) && check_four_blocks
-			(str));
+	return (check_format(str) && check_tetri(str));
 }
 
 int 	read_tetri(t_tetri **tetri, int fd)
@@ -89,7 +77,7 @@ int 	read_tetri(t_tetri **tetri, int fd)
 		printf("%s",buffer);
 		if (ret == 20)
 			last_tetri++;
-		if (!check_valid(buffer) && last_tetri > 1)
+		if (!check_valid(buffer) || last_tetri > 1)
 		{
 			free(buffer);
 			free_tetri(tetri);

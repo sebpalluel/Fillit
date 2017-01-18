@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/17 16:54:12 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/18 14:49:56 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int			read_tetri(t_tetri **tetri, int fd);
 int			check_format(char *str);
 int			check_tetri(char *str);
 int			check_valid(char *str);
-int			check_four_blocks(char *str);
 size_t		organize(t_tetri *tet);
 size_t		tet_min_xy(t_tetri *tet, size_t xy);
 void		mv_upleft(t_tetri *tet, size_t *min);

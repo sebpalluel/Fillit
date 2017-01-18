@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/17 16:33:24 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/18 15:31:10 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ size_t		solve(t_tetri *tet, size_t numtetri)
 		size++;
 		if (initmap_result(&map[0], size))
 			return (0);
-		ft_putstr("\x1b[42;30m newgrid\n");
+		printf("\x1b[42;30mnewgrid\n");
 		unsolved = backtracker(map, tet, tmp_coord, unsolved);//here algo return 0 if solution not found, return 1 if solved it
-		unsolved = 0; // stop debug
 	}
 	ft_freetab((char **)tmp_coord);
 	free(map);
@@ -59,7 +58,6 @@ void	initmap(char *map, size_t size, t_tetri *tet)
 				map[i] = tet_value(i, tet, size + 1, num_coord);
 				if (map[i] != '.')
 					num_coord++;
-				printf("val: %c\n",map[i]);
 			}
 		}
 		i++;
@@ -71,7 +69,7 @@ size_t		initmap_result(t_map *map, size_t size)
 {
 	map->size = size;
 	map->map_size = (map->size * map->size) + map->size;
-	if (!(map->array = ft_strnew(map->map_size + 1)))
+	if (!(map->array = ft_strnew(map->map_size)))
 		return (1);
 	initmap(map->array, map->size, NULL);
 	return (0);
@@ -90,7 +88,7 @@ char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
 	size_t	match_block;
 
 	match_block = int2Dto1D(tet->coord, num_coord, size);
-	printf("i: %lu match_block: %lu\n",i, match_block);
+	//	printf("i: %lu match_block: %lu\n",i, match_block);
 	if (i == match_block && num_coord < 4)
 		return (tet->value);
 	else 
@@ -133,13 +131,17 @@ int			backtracker(t_map *map, t_tetri *tet, unsigned int **coord, \
 	if (tet == NULL)
 		return (print_map(map[0].array));
 	populate_tetri(map[1].array, tet, coord);
-	printf("tet : \n%s",map[1].array);
+	//printf("tet : \n%s",map[1].array);
 	while (pos < ft_strlen(map[0].array))
 	{
 		//if (evaluate_new_pos_tetri(map, tet, coord, pos))
 		//{
-		if (erase == -2)
+		if (erase == -2 || erase == -3)
+		{
+			printf("\x1b[41;30m erase before\n%s", map[0].array);
 			erase_tetri(map[0].array, tet);
+			erase = -1;
+		}
 		if ((erase = put_tetri(map, tet, pos)) == 0)
 		{ 
 			ft_putstr_fd("\x1b[m", 2);
@@ -158,31 +160,40 @@ int		put_tetri(t_map *map, t_tetri *tet, size_t pos)
 	char	*tmp_map;
 
 	i = 0;
+
 	tmp_map = map[0].array;
-	//initmap(tmp_map, map->size, tet);
 	map[0].array = map[0].array + pos;
-	/*while (tmp_map[i])
-	  {
-	  if (tmp_map[i] == tet->value)
-	  {
-	  if (*map->array == '.')
-	 *map->array = tmp_map[i];
-	 else
-	 {
-	 ft_putstr_fd("\x1b[42;30m", 2);
-	 ft_putstr_fd("not empty\n", 2);
-	 return (1);
-	 }
-	 if (tmp_map[i] == '\n')
-	 {
-	 map->array = map->array + map->size - 4;
-	 if (map->array > (tmp_map + map->map_size))
-	 return (test_end(tmp_map + i));
-	 }
-	 }
-	 i++;
-	 map->array++;
-	 }*/
+	while (map[1].array[i])
+	{
+		ft_putstr_fd("\x1b[46;30m", 2);
+		printf("while ,pos %lu\n%s",pos,map[0].array);
+		if (map[1].array[i] == tet->value)
+		{
+			if (*map[0].array == '.')
+			{
+				printf("print %c\n",map[1].array[i]);
+				*map[0].array = map[1].array[i];
+			}
+			else
+			{
+				ft_putstr_fd("\x1b[42;30m", 2);
+				printf("not empty ,pos %lu\n%s",pos,map[0].array);
+				return (-2);
+			}
+		}
+		/* if (map[1].array[i] == '\n')
+		   {
+		   map[0].array = map[0].array + map[0].size - 4;
+		   printf("grid : \n%s",map[0].array);
+		   if (map[0].array > (tmp_map + map[0].map_size))
+		   {
+		   printf("start : \n%s",tmp_map + map[0].map_size);
+		   return (test_end(map[1].array + i));
+		   }
+		   }*/
+		i++;
+		map[0].array++;
+	}
 	ft_putstr("\x1b[43;30m");
 	printf("pos: %lu, size: %lu, tet: %c, put piece:\n%s",pos,map[0].size,tet->value,map[0].array);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/18 15:31:10 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/18 15:59:27 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,10 +173,12 @@ int		put_tetri(t_map *map, t_tetri *tet, size_t pos)
 			{
 				printf("print %c\n",map[1].array[i]);
 				*map[0].array = map[1].array[i];
+				printf("print result\n%s",map[0].array);
 			}
 			else
 			{
 				ft_putstr_fd("\x1b[42;30m", 2);
+				map[0].array = tmp_map;
 				printf("not empty ,pos %lu\n%s",pos,map[0].array);
 				return (-2);
 			}
@@ -194,6 +196,7 @@ int		put_tetri(t_map *map, t_tetri *tet, size_t pos)
 		i++;
 		map[0].array++;
 	}
+	map[0].array = tmp_map;
 	ft_putstr("\x1b[43;30m");
 	printf("pos: %lu, size: %lu, tet: %c, put piece:\n%s",pos,map[0].size,tet->value,map[0].array);
 	return (0);

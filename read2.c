@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/18 14:51:08 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/18 16:03:36 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		check_tetri(char *str)
 		}
 		i++;
 	}
-	if ((contact == 3 || contact == 4) && (num_blocks == 4))
+	if ((contact == 3 || contact == 4) && (num_blocks == NUMBLOCKS))
 		return (1);
 	return (0);
 }

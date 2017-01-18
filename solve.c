@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/18 15:59:27 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/18 16:06:34 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
 
 	match_block = int2Dto1D(tet->coord, num_coord, size);
 	//	printf("i: %lu match_block: %lu\n",i, match_block);
-	if (i == match_block && num_coord < 4)
+	if (i == match_block && num_coord < NUMBLOCKS)
 		return (tet->value);
 	else 
 		return ('.');
@@ -110,7 +110,7 @@ void		populate_tetri(char *tet_map, t_tetri *tet, unsigned int **coord)
 	i = 0;
 	ft_bzero(tet_map, 16);
 	initmap(tet_map, 4, tet);
-	while (i < 4)
+	while (i < NUMBLOCKS)
 	{
 		xy = 0;
 		while (xy < 2)
@@ -185,7 +185,7 @@ int		put_tetri(t_map *map, t_tetri *tet, size_t pos)
 		}
 		/* if (map[1].array[i] == '\n')
 		   {
-		   map[0].array = map[0].array + map[0].size - 4;
+		   map[0].array = map[0].array + map[0].size - NUMBLOCKS;
 		   printf("grid : \n%s",map[0].array);
 		   if (map[0].array > (tmp_map + map[0].map_size))
 		   {

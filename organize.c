@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/18 16:07:05 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/19 14:39:21 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,25 @@ size_t	organize(t_tetri *tet)
 {
 	size_t	min[2];
 	size_t	counter;
+	int		*array;
 
 	counter = 0;
+	if(!(array = (int *)ft_memalloc(NUMBLOCKS * sizeof(*array))))
+		return (0);
 	while (tet != NULL)
 	{
-		min[0] = tet_min_xy(tet, 0);
-		min[1] = tet_min_xy(tet, 1);
+		min[0] = tet_min_xy(tet, array, 0);
+		min[1] = tet_min_xy(tet, array, 1);
 		mv_upleft(tet, min);
 		tet = tet->next;
 		counter++;
 	}
+	free(array);
 	return (counter);
 }
 
-size_t	tet_min_xy(t_tetri *tet, size_t xy)
+size_t	tet_min_xy(t_tetri *tet, int *array, size_t xy)
 {
-	size_t	array[NUMBLOCKS];
 	size_t 	i;
 
 	i = 0;
@@ -40,7 +43,7 @@ size_t	tet_min_xy(t_tetri *tet, size_t xy)
 		array[i] = tet->coord[i][xy];
 		i++;
 	}
-	return ((size_t)ft_intmin((int *)array));
+	return (ft_intmin(array, NUMBLOCKS));
 }
 
 void	mv_upleft(t_tetri *tet, size_t *min)

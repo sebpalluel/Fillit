@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/16 16:01:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/19 14:40:53 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int		main(int argc, char **argv)
 		ft_putstr_fd("error\n",1);
 		return (0);
 	}
-	numtetri = organize(tetri);
+	if (!(numtetri = organize(tetri)))
+		return (0);
 	solve(tetri, numtetri);
 	free_tetri(&tetri);
 	return (0);

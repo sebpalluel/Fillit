@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/18 16:03:36 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/19 17:54:50 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int		check_tetri(char *str)
 		if (str[i] == '#')
 		{
 			num_blocks++;
-			if (str[i + 1] == '#' || str[i + 5] == '#')
+			if (str[i + 1] == '#')
+				contact++;
+			if(str[i + 5] == '#')
 				contact++;
 		}
 		i++;
@@ -74,7 +76,7 @@ int 	read_tetri(t_tetri **tetri, int fd)
 	*tetri = NULL;
 	while ((ret = read(fd, buffer, 21)))
 	{
-		printf("%s",buffer);
+		//		printf("%s",buffer);
 		if (ret == 20)
 			last_tetri++;
 		if (!check_valid(buffer) || last_tetri > 1)

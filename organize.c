@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/19 14:39:21 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 18:21:38 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 size_t	organize(t_tetri *tet)
 {
-	size_t	min[2];
 	size_t	counter;
 	int		*array;
 
@@ -23,9 +22,11 @@ size_t	organize(t_tetri *tet)
 		return (0);
 	while (tet != NULL)
 	{
-		min[0] = tet_min_xy(tet, array, 0);
-		min[1] = tet_min_xy(tet, array, 1);
-		mv_upleft(tet, min);
+		tet->min_x = tet_min_xy(tet, array, 0);
+		tet->min_y = tet_min_xy(tet, array, 1);
+		tet->max_x = tet_max_xy(tet, array, 0);
+		tet->max_y = tet_max_xy(tet, array, 1);
+		mv_upleft(tet);
 		tet = tet->next;
 		counter++;
 	}
@@ -46,20 +47,28 @@ size_t	tet_min_xy(t_tetri *tet, int *array, size_t xy)
 	return (ft_intmin(array, NUMBLOCKS));
 }
 
-void	mv_upleft(t_tetri *tet, size_t *min)
+size_t	tet_max_xy(t_tetri *tet, int *array, size_t xy)
 {
-	int	i;
-	int xy;
+	size_t 	i;
 
 	i = 0;
 	while (i < NUMBLOCKS)
 	{
-		xy = 0;
-		while (xy < 2)
-		{
-			tet->coord[i][xy] -= min[xy];
-			xy++;
-		}
+		array[i] = tet->coord[i][xy];
+		i++;
+	}
+	return (ft_intmax(array, NUMBLOCKS));
+}
+
+void	mv_upleft(t_tetri *tet)
+{
+	int	i;
+
+	i = 0;
+	while (i < NUMBLOCKS)
+	{
+		tet->coord[i][0] -= tet->min_x;
+		tet->coord[i][1] -= tet->min_y;
 		i++;
 	}
 }

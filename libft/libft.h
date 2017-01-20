@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 15:50:29 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/19 13:27:45 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:58:17 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*ft_itoa(int n);
 int		ft_sqrt(int nb);
 
 size_t	ft_tablen(char **tab);
+char	**ft_tabcpy(char **str);
 
 char	*ft_strcat(char *src, const char *dest);
 char	*ft_strchr(const char *src, int c);

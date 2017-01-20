@@ -6,11 +6,12 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:57:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/20 17:02:00 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:51:41 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char		**ft_strtabcpy(char **str)
 {

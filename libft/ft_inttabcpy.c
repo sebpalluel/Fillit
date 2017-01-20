@@ -6,13 +6,11 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 16:55:15 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/20 17:43:16 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:51:24 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-#include <stdio.h>
 
 int			*ft_intdup(int *array, size_t width)
 {
@@ -44,7 +42,6 @@ int			**ft_inttabcpy(int **array, size_t width)
 		while (array[i])
 		{
 			tab[i] = ft_intdup(array[i], width);
-			printf("test 1 %d\n",tab[i][1]);
 			i++;
 		}
 		tab[i] = 0;

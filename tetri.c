@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/16 16:08:55 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 14:16:17 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,24 @@
 t_tetri		*create_tetri(char *str, char carac)
 {
 	size_t		i;
-	size_t		j;
 	size_t		current;
 	t_tetri		*new;
 
 	if (!(new = malloc(sizeof(t_tetri))))
 		return (NULL);
 	i = 0;
-	j = 0;
 	current = 0;
 	while (str[i])
 	{
-		if (str[i] == '\n')
-			j++;
 		if (str[i] == '#')
 		{
-			new->coord[current][0] = (i % 5);
-			new->coord[current][1] = j;
+			new->coord[current][0] = i % 5;
+			new->coord[current][1] = i / 5;
 			current++;
 		}
 		i++;
 	}
 	new->value = carac;
-	printf("valid %c\n",new->value);
 	return (new);
 }
 

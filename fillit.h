@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/20 18:55:50 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 19:46:46 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ size_t		solve(t_tetri *tet, size_t numtetri);
 void		initmap(char *map, size_t size, t_tetri *tet);
 size_t		initmap_result(t_map *map, size_t size);
 char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord);
-int			backtracker(char *result, t_map **map, t_tetri *tet, unsigned int **coord, \
+int			backtracker(char *result, t_map **map, t_tetri *tet, unsigned int *coord, \
 		int erase);
 //size_t		evaluate_new_pos_tetri(t_map *map, t_tetri *tet, \
 //	unsigned int **coord, size_t pos);
-void		populate_tetri(char *tet_map, t_tetri *tet, unsigned int **coord);
+void		populate_tetri(char *tet_map, t_tetri *tet);
 void		erase_tetri(char *array, t_tetri *tet);
 int			put_tetri(char *result, t_map **map, t_tetri *tet, size_t pos);
 int			test_end(char *tmp_map);

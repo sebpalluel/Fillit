@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/20 18:55:44 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 20:50:49 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ size_t	organize(t_tetri *tet)
 	{
 		min[0] = tet_min_xy(tet, array, 0);
 		min[1] = tet_min_xy(tet, array, 1);
-		tet->width = tet_max_xy(tet, array, 0) - min[0];
-		tet->height = tet_max_xy(tet, array, 1) - min[1];
+		tet->width = tet_max_xy(tet, array, 0) - min[0] + 1;
+		tet->height = tet_max_xy(tet, array, 1) - min[1] + 1;
 		mv_upleft(tet, min);
 		tet = tet->next;
 		counter++;

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/19 17:32:25 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 22:44:37 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t		solve(t_tetri *tet, size_t numtetri)
 	t_map	**map = NULL;
 	size_t	size;
 	size_t	unsolved;
-	unsigned int **tmp_coord = NULL;
+	unsigned int *pos_coord = NULL;
 	size_t i;
 	char	*result;
 
@@ -25,7 +25,7 @@ size_t		solve(t_tetri *tet, size_t numtetri)
 	size = calc_min_square(numtetri) - 1;
 	unsolved = -1;
 	if (!(map = (t_map **)ft_memalloc(3 * sizeof(t_map *))) \
-			|| !(tmp_coord = (unsigned int **)ft_newtab(4, 2)) )
+			|| !(pos_coord = (unsigned int *)ft_memalloc(2 * sizeof(*pos_coord))))
 		return (0);
 	while (map && i < 2)
 	{
@@ -33,15 +33,6 @@ size_t		solve(t_tetri *tet, size_t numtetri)
 		i++;
 	}
 	map[i] = NULL;
-	for(i = 0; i < NUMBLOCKS; i++)
-	{
-		int xy = 0;
-		while (xy < 2)
-		{
-			tmp_coord[i][xy] = tet->coord[i][xy];
-			xy++;
-		}
-	}
 	if(initmap_result(map[1], 4))
 		return (0);
 	while (unsolved != 0)
@@ -52,11 +43,11 @@ size_t		solve(t_tetri *tet, size_t numtetri)
 		result = ft_strnew(map[0]->map_size);
 		initmap(result, map[0]->size, NULL);
 		printf("\x1b[42;30mnewgrid size %lu\n",size);
-		unsolved = backtracker(result, map, tet, tmp_coord, unsolved);//here algo return 0 if solution not found, return 1 if solved it
+		unsolved = backtracker(result, map, tet, pos_coord, unsolved);//here algo return 0 if solution not found, return 1 if solved it
 		free(result);
 		free(map[0]->array);
 	}
-	ft_freetab((char **)tmp_coord);
+	free(pos_coord);
 	free(map);
 	return (1);
 }
@@ -111,41 +102,50 @@ char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord)
 	size_t	match_block;
 
 	match_block = int2Dto1D(tet->coord, num_coord, size);
-	//	printf("i: %lu match_block: %lu\n",i, match_block);
 	if (i == match_block && num_coord < NUMBLOCKS)
 		return (tet->value);
 	else 
 		return ('.');
 }
 
-/*size_t		evaluate_new_pos_tetri(t_map *map, t_tetri *tet, \
-  unsigned int **coord, size_t pos)
-  {
-
-
-  }*/
-
-void		populate_tetri(char *tet_map, t_tetri *tet, unsigned int **coord)
+void	*indexto2D(unsigned int *coord, size_t i, size_t width)
 {
-	size_t	i;
-	size_t	xy;
-
-	i = 0;
-	ft_bzero(tet_map, 16);
-	initmap(tet_map, 4, tet);
-	while (i < NUMBLOCKS)
-	{
-		xy = 0;
-		while (xy < 2)
-		{
-			coord[i][xy] = tet->coord[i][xy];
-			xy++;
-		}
-		i++;
-	}
+	coord[0] = i % width;
+	coord[1] = i / (width + 1);
+	return (coord);
 }
 
-int			backtracker(char *result, t_map **map, t_tetri *tet, unsigned int **coord, \
+size_t		evaluate_new_pos_tetri(t_map **map, t_tetri *tet, unsigned int *pos_coord, size_t pos)
+{
+	size_t			new_pos;
+	size_t			width;
+	size_t			height;
+	size_t			size;
+
+	new_pos = pos;
+	printf("\x1b[45;15mbacktrack pos %lu, tet->val %c, tet->width %lu, tet->height %lu\n",pos, tet->value, tet->width, tet->height);
+	size = map[0]->size;
+	indexto2D(pos_coord, new_pos, map[0]->size);
+	width = pos_coord[0] += tet->width;
+	height = pos_coord[1] += tet->height;
+	while ((width > size || height > size) && new_pos < (map[0]->map_size - NUMBLOCKS))
+	{
+		new_pos++;
+		indexto2D(pos_coord, new_pos, map[0]->size);
+		width = pos_coord[0] += tet->width;
+		height = pos_coord[1] += tet->height;
+		printf("newpos %lu, pos_coord_x %d, pos_coord_y %d, width %lu, height %lu\n", new_pos, pos_coord[0], pos_coord[1], width, height);
+	}
+	return (new_pos);
+}
+
+void		populate_tetri(char *tet_map, t_tetri *tet)
+{
+	ft_bzero(tet_map, 16);
+	initmap(tet_map, 4, tet);
+}
+
+int			backtracker(char *result, t_map **map, t_tetri *tet, unsigned int *coord, \
 		int erase)
 {
 	size_t		pos;
@@ -156,24 +156,21 @@ int			backtracker(char *result, t_map **map, t_tetri *tet, unsigned int **coord,
 	printf("\x1b[41;30m length %lu figure\n%s", ft_strlen(result), map[1]->array);
 	while (pos < ft_strlen(result))
 	{
-		populate_tetri(map[1]->array, tet, coord);
-		//if (evaluate_new_pos_tetri(map, tet, coord, pos))
+		populate_tetri(map[1]->array, tet);
+		//pos = evaluate_new_pos_tetri(map, tet, coord, pos);
+		//if (erase == -2 || erase == -3)
 		//{
-		if (erase == -2 || erase == -3)
-		{
-			printf("\x1b[41;30merase before\n%s",result);
-			erase_tetri(result, tet);
-			erase = -1;
-		}
+		printf("\x1b[41;30merase before\n%s",result);
+		erase_tetri(result, tet);
+		//	erase = -1;
+		//}
 		if ((erase = put_tetri(result, map, tet, pos)) == 0)
 		{ 
 			ft_putstr_fd("\x1b[mbacktracker\n", 1);
 			if (backtracker(result, map, tet->next, coord, erase) == 0)
 				return (0);
 		}
-		//}
 		pos++;
-		printf("pos%lu\n",pos);
 	}
 	return (-1);
 }
@@ -186,7 +183,7 @@ int		put_tetri(char *result, t_map **map, t_tetri *tet, size_t pos)
 	i = 0;
 
 	tmp_map = result;
-	result = result + pos;
+	result = result + pos; // here -1 for debug
 	while (map[1]->array[i])
 	{
 		ft_putstr_fd("\x1b[46;30m", 1);
@@ -202,7 +199,7 @@ int		put_tetri(char *result, t_map **map, t_tetri *tet, size_t pos)
 			else
 			{
 				ft_putstr_fd("\x1b[42;30m", 1);
-				printf("not empty ,pos %lu\n%s",pos,tmp_map);
+				printf("not empty %c\npos %lu\n%s",*result,pos,tmp_map);
 				return (-2);
 			}
 		}

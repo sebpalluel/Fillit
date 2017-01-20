@@ -6,21 +6,20 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 15:57:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/20 15:57:32 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:10:52 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		**ft_tabcpy(char **str)
+void		**ft_tabcpy(char **str)
 {
 	char	**tab;
-	int		i;
+	size_t	i;
 
 	if (str)
 	{
-		tab = (char**)malloc(sizeof(char*) * (ft_tablen(str) + 1));
-		if (!tab)
+		if (!(tab = (char**)malloc(sizeof(char*) * (ft_tablen(str) + 1))))
 			return (NULL);
 		i = 0;
 		while (str[i])
@@ -29,7 +28,7 @@ char		**ft_tabcpy(char **str)
 			i++;
 		}
 		tab[i] = 0;
-		return (tab);
+		return ((void **)tab);
 	}
 	return (NULL);
 }

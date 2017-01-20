@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/18 14:49:56 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:40:50 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ int			check_format(char *str);
 int			check_tetri(char *str);
 int			check_valid(char *str);
 size_t		organize(t_tetri *tet);
-size_t		tet_min_xy(t_tetri *tet, size_t xy);
+size_t		tet_min_xy(t_tetri *tet, int *array,  size_t xy);
 void		mv_upleft(t_tetri *tet, size_t *min);
 size_t		calc_min_square(size_t numtetri);
 size_t		solve(t_tetri *tet, size_t numtetri);
 void		initmap(char *map, size_t size, t_tetri *tet);
 size_t		initmap_result(t_map *map, size_t size);
 char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord);
-int			backtracker(t_map *map, t_tetri *tet, unsigned int **coord, \
+int			backtracker(char *result, t_map **map, t_tetri *tet, unsigned int **coord, \
 		int erase);
 //size_t		evaluate_new_pos_tetri(t_map *map, t_tetri *tet, \
 //	unsigned int **coord, size_t pos);
 void		populate_tetri(char *tet_map, t_tetri *tet, unsigned int **coord);
 void		erase_tetri(char *array, t_tetri *tet);
-int			put_tetri(t_map *map, t_tetri *tet, size_t pos);
+int			put_tetri(char *result, t_map **map, t_tetri *tet, size_t pos);
 int			test_end(char *tmp_map);
 int			print_map(char *map);
 void		free_tetri(t_tetri **tetri);

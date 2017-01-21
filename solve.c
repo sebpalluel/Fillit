@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/21 19:54:19 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 20:32:40 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,16 @@ void	initmap(char *map, size_t size, t_list **tet)
 	map[i] = '\0';
 }
 
-size_t		int2Dto1D(unsigned int coord[4][2], size_t num_coord, size_t tab_width)
-{
-	size_t	index;
-
-	index = (size_t)(coord[num_coord][1] * tab_width + coord[num_coord][0]);
-	return (index);
-}
-
 char		tet_value(size_t i, t_list **tet, size_t size, size_t num_coord)
 {
 	size_t	match_block;
 
 	match_block = 666;
 	if (num_coord < NUMBLOCKS)
+	{
 		match_block = ft_int2Dto1D((int **)TET->coord, num_coord, size);
+		printf("tet_coordx: %lu tet_coordy: %lu\n",TET->coord[num_coord][0], TET->coord[num_coord][1]);
+	}
 	if (i == match_block)
 		return (TET->value);
 	else 
@@ -149,6 +144,7 @@ int			backtracker(char *result, t_map *map, t_list **tet, int erase)
 	while (pos < ft_strlen(result))
 	{
 		populate_tetri(map->array, tet);
+		printf("\x1b[47;10mmap->array\n%s",map->array);
 		//pos = evaluate_new_pos_tetri(map, tet, pos);
 		//if (erase == -2 || erase == -3)
 		//{
@@ -173,13 +169,12 @@ int		put_tetri(char *result, t_map *map, t_list **tet, size_t pos)
 	char	*tmp_map;
 
 	i = 0;
-
 	tmp_map = result;
 	result = result + pos; // here -1 for debug
 	while (map->array[i])
 	{
 		ft_putstr_fd("\x1b[46;30m", 1);
-		printf("while pos: %lu map: %c tet: %c\n%s",pos,map->array[i], TET->value, result);
+		printf("while pos: %lu i: %d map: %c tet: %c\n%s", pos, i, map->array[i], TET->value, result);
 		if (map->array[i] == TET->value)
 		{
 			if (*result == '.')

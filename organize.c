@@ -6,24 +6,28 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/20 20:50:49 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 14:01:35 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-size_t	organize(t_tetri *tet)
+size_t	organize(t_list **tet)
 {
 	size_t	counter;
 	int		*array;
 	size_t  min[2];
+	t_list	*first_tet;
 
 	counter = 0;
+	first_tet = *tet;
 	if(!(array = (int *)ft_memalloc(NUMBLOCKS * sizeof(*array))))
 		return (0);
-	while (tet != NULL)
+	while (*tet)
 	{
+		printf("organize before, tet->coord %lu\n", TET->coord[0][0]);
 		min[0] = tet_min_xy(tet, array, 0);
+		printf("organize after\n");
 		min[1] = tet_min_xy(tet, array, 1);
 		tet->width = tet_max_xy(tet, array, 0) - min[0] + 1;
 		tet->height = tet_max_xy(tet, array, 1) - min[1] + 1;
@@ -35,7 +39,7 @@ size_t	organize(t_tetri *tet)
 	return (counter);
 }
 
-size_t	tet_min_xy(t_tetri *tet, int *array, size_t xy)
+size_t	tet_min_xy(t_list **tet, int *array, size_t xy)
 {
 	size_t 	i;
 
@@ -48,7 +52,7 @@ size_t	tet_min_xy(t_tetri *tet, int *array, size_t xy)
 	return (ft_intmin(array, NUMBLOCKS));
 }
 
-size_t	tet_max_xy(t_tetri *tet, int *array, size_t xy)
+size_t	tet_max_xy(t_list **tet, int *array, size_t xy)
 {
 	size_t 	i;
 

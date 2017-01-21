@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/19 14:40:53 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 13:46:27 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,24 @@ int		main(int argc, char **argv)
 {
 	int	fd;
 	int	error;
-	t_tetri	*tetri;
+	t_list	**tetri;
 	size_t numtetri;
 
 	numtetri = 0;
-	if(!(tetri = ft_memalloc(sizeof(t_tetri))))
+	if(!(tetri = (t_list **)ft_memalloc(sizeof(t_list *))))
 		return (0);
-	ft_bzero(tetri, sizeof(t_tetri));
+	*tetri = NULL;
 	fd = open(argv[1], O_RDONLY);
-	error = read_tetri(&tetri, fd);
+	error = read_tetri(tetri, fd);
 	if (argc != 2 || error)
 	{
 		ft_putstr_fd("error\n",1);
+		ft_lstfree(tetri);
 		return (0);
 	}
 	if (!(numtetri = organize(tetri)))
 		return (0);
+	printf("after organize\n");
 	solve(tetri, numtetri);
 	free_tetri(&tetri);
 	return (0);

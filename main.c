@@ -6,22 +6,22 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/21 18:40:50 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 19:33:06 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
-	int	fd;
+	int		fd;
 	t_list	**tet;
-	size_t numtetri;
+	t_map 	*map;
 	char	carac;
 
-	numtetri = 0;
 	carac = 'A';
-	if(!(tet = (t_list **)ft_memalloc(sizeof(t_list *))))
+	if(!(tet = (t_list **)ft_memalloc(sizeof(t_list *))) ||\
+			!(map = (t_map *)ft_memalloc(sizeof(t_map))))
 		return (0);
 	*tet = NULL;
 	fd = open(argv[1], O_RDONLY);
@@ -31,9 +31,17 @@ int		main(int argc, char **argv)
 		ft_lstfree(tet);
 		return (close(fd));
 	}
-	if (!(numtetri = organize(tet, carac)))
+	if (!(map->numtetri = organize(tet, carac)))
 		return (0);
-	solve(tet, numtetri);
+	solve(tet, map);
 	ft_lstfree(tet);
+	free_map(map);
 	return (0);
+}
+
+void		free_map(t_map *map)
+{
+	free(map->array);
+	free(map->coord);
+	free(map);
 }

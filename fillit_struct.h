@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 20:53:06 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/21 19:00:10 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 19:06:35 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef	struct		s_map
 	size_t			size;
 	size_t			map_size;
 	size_t			numtetri;
-	size_t			**coord;
+	size_t			*coord;
 	char			*array;
 }					t_map;
 

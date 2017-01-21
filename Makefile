@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/01/14 20:05:43 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/01/21 12:19:51 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -19,18 +19,20 @@ SRC = main.c \
 	  solve.c \
 	  tetri.c
 
-OBJ		= 	$(SRC:.c=.o)
+OBJ		=	$(SRC:.c=.o)
 
-CMP		= 	gcc
+CMP		=	gcc
 
-FLAGS	= 	-Wall -Wextra -Werror
+FLAGS	=	-Wall -Wextra -Werror
+
+DEBUG	=	-g
 
 LIB = -L libft/ -lft
 
 all : lib $(NAME)
 
 $(NAME) : 
-	$(CMP) $(FLAGS) -o $(NAME) $(SRC) $(LIB)
+	$(CMP) $(DEBUG) $(FLAGS) -o $(NAME) $(SRC) $(LIB)
 
 lib :
 	make re -C libft

@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/21 17:17:10 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 17:26:29 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,5 @@ int 	read_tetri(t_list **tetri, int fd)
 			return (read_tetri_error(buffer));
 		carac++;
 	}
-	if (last_tetri)
-		return (0);
-	else
-		return (1);
+	return (last_tetri ? 0 : 1);
 }

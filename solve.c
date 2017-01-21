@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/21 19:37:28 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 19:54:19 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ size_t		solve(t_list **tet, t_map *map)
 		return (0);
 	while (unsolved != 0)
 	{
+		size++;
 		initmap_result(map, size);
 		result = ft_strnew(map->map_size);
 		initmap(result, map->size, NULL);
@@ -40,7 +41,7 @@ size_t		solve(t_list **tet, t_map *map)
 size_t		init_t_map(t_map *map)
 {
 	if (!(map->coord = (size_t *)ft_memalloc(2 * sizeof(size_t))) ||\
-			!(map->array = ft_strnew(20)))
+			!(map->array = ft_strnew(MAPSIZE)))
 		return (1);
 	else
 		return (0);
@@ -142,13 +143,13 @@ int			backtracker(char *result, t_map *map, t_list **tet, int erase)
 	size_t		pos;
 
 	pos = 0;
-	if (tet == NULL)
+	if (*tet == NULL)
 		return (print_map(result));
 	printf("\x1b[41;30mlength %lu figure\n%s", ft_strlen(result), map->array);
 	while (pos < ft_strlen(result))
 	{
 		populate_tetri(map->array, tet);
-		//pos = evaluate_new_pos_tetri(map, tet, coord, pos);
+		//pos = evaluate_new_pos_tetri(map, tet, pos);
 		//if (erase == -2 || erase == -3)
 		//{
 		printf("\x1b[41;30merase before\n%s",result);
@@ -158,8 +159,7 @@ int			backtracker(char *result, t_map *map, t_list **tet, int erase)
 		if ((erase = put_tetri(result, map, tet, pos)) == 0)
 		{ 
 			ft_putstr_fd("\x1b[mbacktracker\n", 1);
-			*tet = (*tet)->next;
-			if (backtracker(result, map, tet, erase) == 0)
+			if (backtracker(result, map, &(*tet)->next, erase) == 0)
 				return (0);
 		}
 		pos++;

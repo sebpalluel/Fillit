@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/21 16:43:39 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 18:37:01 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,25 @@ int			read_tetri(t_list **tetri, int fd);
 int			check_format(char *str);
 int			check_tetri(char *str);
 int			check_valid(char *str);
-size_t		organize(t_list **tet);
+size_t		organize(t_list **tet, char carac);
 size_t		tet_min_xy(t_list **tet, int *array,  size_t xy);
 size_t		tet_max_xy(t_list **tet, int *array, size_t xy);
 void		mv_upleft(t_list **tet, size_t min[2]);
 size_t		calc_min_square(size_t numtetri);
-size_t		solve(t_tetri *tet, size_t numtetri);
-void		initmap(char *map, size_t size, t_tetri *tet);
+size_t		solve(t_list **tet, size_t numtetri);
+void		initmap(char *map, size_t size, t_list **tet);
 size_t		initmap_result(t_map *map, size_t size);
-char		tet_value(size_t i, t_tetri *tet, size_t size, size_t num_coord);
-int			backtracker(char *result, t_map **map, t_tetri *tet, unsigned int *coord, \
+char		tet_value(size_t i, t_list **tet, size_t size, size_t num_coord);
+int			backtracker(char *result, t_map **map, t_list **tet, unsigned int *coord, \
 		int erase);
 //size_t		evaluate_new_pos_tetri(t_map *map, t_tetri *tet, \
 //	unsigned int **coord, size_t pos);
-void		populate_tetri(char *tet_map, t_tetri *tet);
-void		erase_tetri(char *array, t_tetri *tet);
-int			put_tetri(char *result, t_map **map, t_tetri *tet, size_t pos);
+void		populate_tetri(char *tet_map, t_list **tet);
+void		erase_tetri(char *array, t_list **tet);
+int			put_tetri(char *result, t_map **map, t_list **tet, size_t pos);
 int			test_end(char *tmp_map);
 int			print_map(char *map);
-size_t		add_tetri(t_list **tet, char *buffer, char carac);
-size_t		create_tetri(t_tetri *new, char *str, char carac);
-//void		create_list_tetri(t_list **tet, t_tetri tetri_new);
+size_t		add_tetri(t_list **tet, char *buffer);
+size_t		create_tetri(t_tetri *new, char *str);
+
 #endif

@@ -6,13 +6,13 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/21 14:01:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 18:37:41 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-size_t	organize(t_list **tet)
+size_t	organize(t_list **tet, char carac)
 {
 	size_t	counter;
 	int		*array;
@@ -25,16 +25,17 @@ size_t	organize(t_list **tet)
 		return (0);
 	while (*tet)
 	{
-		printf("organize before, tet->coord %lu\n", TET->coord[0][0]);
+		TET->value = carac;
+		carac++;
 		min[0] = tet_min_xy(tet, array, 0);
-		printf("organize after\n");
 		min[1] = tet_min_xy(tet, array, 1);
-		tet->width = tet_max_xy(tet, array, 0) - min[0] + 1;
-		tet->height = tet_max_xy(tet, array, 1) - min[1] + 1;
+		TET->width = tet_max_xy(tet, array, 0) - min[0] + 1;
+		TET->height = tet_max_xy(tet, array, 1) - min[1] + 1;
 		mv_upleft(tet, min);
-		tet = tet->next;
+		*tet = (*tet)->next;
 		counter++;
 	}
+	*tet = first_tet;
 	free(array);
 	return (counter);
 }
@@ -46,7 +47,7 @@ size_t	tet_min_xy(t_list **tet, int *array, size_t xy)
 	i = 0;
 	while (i < NUMBLOCKS)
 	{
-		array[i] = tet->coord[i][xy];
+		array[i] = TET->coord[i][xy];
 		i++;
 	}
 	return (ft_intmin(array, NUMBLOCKS));
@@ -59,21 +60,21 @@ size_t	tet_max_xy(t_list **tet, int *array, size_t xy)
 	i = 0;
 	while (i < NUMBLOCKS)
 	{
-		array[i] = tet->coord[i][xy];
+		array[i] = TET->coord[i][xy];
 		i++;
 	}
 	return (ft_intmax(array, NUMBLOCKS));
 }
 
-void	mv_upleft(t_tetri *tet, size_t min[2])
+void	mv_upleft(t_list **tet, size_t min[2])
 {
 	int	i;
 
 	i = 0;
 	while (i < NUMBLOCKS)
 	{
-		tet->coord[i][0] -= min[0];
-		tet->coord[i][1] -= min[1];
+		TET->coord[i][0] -= min[0];
+		TET->coord[i][1] -= min[1];
 		i++;
 	}
 }

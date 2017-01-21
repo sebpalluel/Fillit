@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/20 14:16:17 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 12:39:08 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_tetri		*create_tetri(char *str, char carac)
 		return (NULL);
 	i = 0;
 	current = 0;
+	new->next = NULL;
 	while (str[i])
 	{
 		if (str[i] == '#')

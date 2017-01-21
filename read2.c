@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/21 15:38:23 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 17:17:10 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ int		check_valid(char *str)
 	return (check_format(str) && check_tetri(str));
 }
 
+size_t read_tetri_error(char *buffer)
+{
+	free(buffer);
+	return (1);
+}
+
 int 	read_tetri(t_list **tetri, int fd)
 {
 	char		*buffer;
@@ -80,12 +86,9 @@ int 	read_tetri(t_list **tetri, int fd)
 			last_tetri++;
 		if (!check_valid(buffer) || last_tetri > 1 || \
 				(ret == 21 && buffer[ret - 1] != '\n'))
-		{
-			free(buffer);
-			ft_lstfree(tetri);
-			return (1);
-		}
-		add_tetri(tetri, buffer, carac);
+			return (read_tetri_error(buffer));
+		if (!add_tetri(tetri, buffer, carac))
+			return (read_tetri_error(buffer));
 		carac++;
 	}
 	if (last_tetri)

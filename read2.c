@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/21 13:36:50 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 15:38:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		check_format(char *str)
 	int	i;
 
 	i = 0;
-	while (i < 20)
+	while (i < MAPSIZE)
 	{
 		if (((i + 1) % 5) == 0)
 		{
@@ -41,7 +41,7 @@ int		check_tetri(char *str)
 	i = 0;
 	contact = 0;
 	num_blocks = 0;
-	while (i < 20)
+	while (i < MAPSIZE)
 	{
 		if (str[i] == '#')
 		{
@@ -78,7 +78,8 @@ int 	read_tetri(t_list **tetri, int fd)
 		printf("%s",buffer);
 		if (ret == 20)
 			last_tetri++;
-		if (!check_valid(buffer) || last_tetri > 1)
+		if (!check_valid(buffer) || last_tetri > 1 || \
+				(ret == 21 && buffer[ret - 1] != '\n'))
 		{
 			free(buffer);
 			ft_lstfree(tetri);

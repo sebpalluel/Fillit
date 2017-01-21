@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/21 14:01:31 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/21 16:43:39 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "libft/libft.h"
 # include <stdio.h> // temporary, to test function, don't forget to erase with all the printf !!
 # define NUMBLOCKS 4
+# define MAPSIZE 20
 
 int			read_tetri(t_list **tetri, int fd);
 int			check_format(char *str);
@@ -28,7 +29,7 @@ int			check_valid(char *str);
 size_t		organize(t_list **tet);
 size_t		tet_min_xy(t_list **tet, int *array,  size_t xy);
 size_t		tet_max_xy(t_list **tet, int *array, size_t xy);
-void		mv_upleft(t_tetri *tet, size_t min[2]);
+void		mv_upleft(t_list **tet, size_t min[2]);
 size_t		calc_min_square(size_t numtetri);
 size_t		solve(t_tetri *tet, size_t numtetri);
 void		initmap(char *map, size_t size, t_tetri *tet);
@@ -43,7 +44,7 @@ void		erase_tetri(char *array, t_tetri *tet);
 int			put_tetri(char *result, t_map **map, t_tetri *tet, size_t pos);
 int			test_end(char *tmp_map);
 int			print_map(char *map);
-void		free_tetri(t_tetri **tetri);
-void		add_tetri(t_list **tetri, char *buffer, char carac);
-t_tetri		*create_tetri(char *str, char carac);
+size_t		add_tetri(t_list **tet, char *buffer, char carac);
+size_t		create_tetri(t_tetri *new, char *str, char carac);
+//void		create_list_tetri(t_list **tet, t_tetri tetri_new);
 #endif

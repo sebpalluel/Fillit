@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/21 20:32:40 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/22 14:37:07 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char		tet_value(size_t i, t_list **tet, size_t size, size_t num_coord)
 	match_block = 666;
 	if (num_coord < NUMBLOCKS)
 	{
-		match_block = ft_int2Dto1D((int **)TET->coord, num_coord, size);
+		match_block = TET->coord[num_coord][1] * size + TET->coord[num_coord][0];
 		printf("tet_coordx: %lu tet_coordy: %lu\n",TET->coord[num_coord][0], TET->coord[num_coord][1]);
 	}
 	if (i == match_block)

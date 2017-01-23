@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/01/21 12:19:51 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/01/23 14:03:32 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -14,7 +14,8 @@ NAME = fillit
 
 SRC = main.c \
 	  draw.c \
-	  read2.c \
+	  map.c \
+	  read.c \
 	  organize.c \
 	  solve.c \
 	  tetri.c

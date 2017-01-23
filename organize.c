@@ -6,13 +6,13 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/21 18:37:41 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/23 14:06:53 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-size_t	organize(t_list **tet, char carac)
+size_t		organize(t_list **tet, char carac)
 {
 	size_t	counter;
 	int		*array;
@@ -40,7 +40,7 @@ size_t	organize(t_list **tet, char carac)
 	return (counter);
 }
 
-size_t	tet_min_xy(t_list **tet, int *array, size_t xy)
+size_t		tet_min_xy(t_list **tet, int *array, size_t xy)
 {
 	size_t 	i;
 
@@ -53,7 +53,7 @@ size_t	tet_min_xy(t_list **tet, int *array, size_t xy)
 	return (ft_intmin(array, NUMBLOCKS));
 }
 
-size_t	tet_max_xy(t_list **tet, int *array, size_t xy)
+size_t		tet_max_xy(t_list **tet, int *array, size_t xy)
 {
 	size_t 	i;
 
@@ -66,9 +66,9 @@ size_t	tet_max_xy(t_list **tet, int *array, size_t xy)
 	return (ft_intmax(array, NUMBLOCKS));
 }
 
-void	mv_upleft(t_list **tet, size_t min[2])
+void		mv_upleft(t_list **tet, size_t min[2])
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < NUMBLOCKS)
@@ -79,9 +79,9 @@ void	mv_upleft(t_list **tet, size_t min[2])
 	}
 }
 
-size_t	calc_min_square(size_t numtetri)
+size_t		calc_min_square(size_t numtetri)
 {
-	size_t numblocks;
+	size_t	numblocks;
 
 	numblocks = numtetri * NUMBLOCKS;
 	return (ft_sqrt(numblocks));

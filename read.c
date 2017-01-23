@@ -6,15 +6,15 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/21 18:39:33 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/23 14:10:12 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		check_format(char *str)
+int			check_format(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < MAPSIZE)
@@ -32,11 +32,11 @@ int		check_format(char *str)
 	return (1);
 }
 
-int		check_tetri(char *str)
+int			check_tetri(char *str)
 {
-	int		i;
-	int		contact;
-	int		num_blocks;
+	size_t	i;
+	size_t	contact;
+	size_t	num_blocks;
 
 	i = 0;
 	contact = 0;
@@ -58,18 +58,18 @@ int		check_tetri(char *str)
 	return (0);
 }
 
-int		check_valid(char *str)
+int			check_valid(char *str)
 {
 	return (check_format(str) && check_tetri(str));
 }
 
-size_t read_tetri_error(char *buffer)
+size_t 		read_tetri_error(char *buffer)
 {
 	free(buffer);
 	return (1);
 }
 
-int 	read_tetri(t_list **tetri, int fd)
+int 		read_tetri(t_list **tetri, int fd)
 {
 	char		*buffer;
 	size_t		last_tetri;

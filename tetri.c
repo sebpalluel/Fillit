@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/21 18:32:21 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/23 14:25:00 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 size_t		create_tetri(t_tetri *new, char *str)
 {
-	size_t		i;
-	size_t		current;
+	size_t	i;
+	size_t	current;
 
 	i = 0;
 	current = 0;
@@ -32,7 +32,6 @@ size_t		create_tetri(t_tetri *new, char *str)
 		}
 		i++;
 	}
-	//new->value = carac;
 	return (1);
 }
 

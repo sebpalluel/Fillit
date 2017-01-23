@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/01/23 14:03:32 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/01/23 15:34:11 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -26,14 +26,12 @@ CMP		=	gcc
 
 FLAGS	=	-Wall -Wextra -Werror
 
-DEBUG	=	-g
-
 LIB = -L libft/ -lft
 
 all : lib $(NAME)
 
-$(NAME) : 
-	$(CMP) $(DEBUG) $(FLAGS) -o $(NAME) $(SRC) $(LIB)
+$(NAME) :
+	$(CMP) $(FLAGS) -o $(NAME) $(SRC) $(LIB)
 
 lib :
 	make re -C libft

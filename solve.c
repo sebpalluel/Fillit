@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/23 14:03:37 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/23 14:28:40 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int			backtracker(char *result, t_map *map, t_list **tet, int erase)
 	{
 		populate_tetri(map->array, tet);
 		printf("\x1b[47;10mmap->array\n%s",map->array);
-		pos = evaluate_new_pos_tetri(map, tet, pos);
+		//		pos = evaluate_new_pos_tetri(map, tet, pos);
 		//if (erase == -2 || erase == -3)
 		//{
 		printf("\x1b[41;30merase before\n%s",result);

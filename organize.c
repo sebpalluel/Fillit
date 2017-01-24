@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/23 14:06:53 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/24 22:46:46 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ size_t		organize(t_list **tet, char carac)
 		return (0);
 	while (*tet)
 	{
-		TET->value = carac;
+		TET(tet)->value = carac;
 		carac++;
 		min[0] = tet_min_xy(tet, array, 0);
 		min[1] = tet_min_xy(tet, array, 1);
-		TET->width = tet_max_xy(tet, array, 0) - min[0] + 1;
-		TET->height = tet_max_xy(tet, array, 1) - min[1] + 1;
+		TET(tet)->width = tet_max_xy(tet, array, 0) - min[0] + 1;
+		TET(tet)->height = tet_max_xy(tet, array, 1) - min[1] + 1;
 		mv_upleft(tet, min);
 		*tet = (*tet)->next;
 		counter++;
@@ -47,7 +47,7 @@ size_t		tet_min_xy(t_list **tet, int *array, size_t xy)
 	i = 0;
 	while (i < NUMBLOCKS)
 	{
-		array[i] = TET->coord[i][xy];
+		array[i] = TET(tet)->coord[i][xy];
 		i++;
 	}
 	return (ft_intmin(array, NUMBLOCKS));
@@ -60,7 +60,7 @@ size_t		tet_max_xy(t_list **tet, int *array, size_t xy)
 	i = 0;
 	while (i < NUMBLOCKS)
 	{
-		array[i] = TET->coord[i][xy];
+		array[i] = TET(tet)->coord[i][xy];
 		i++;
 	}
 	return (ft_intmax(array, NUMBLOCKS));
@@ -73,8 +73,8 @@ void		mv_upleft(t_list **tet, size_t min[2])
 	i = 0;
 	while (i < NUMBLOCKS)
 	{
-		TET->coord[i][0] -= min[0];
-		TET->coord[i][1] -= min[1];
+		TET(tet)->coord[i][0] -= min[0];
+		TET(tet)->coord[i][1] -= min[1];
 		i++;
 	}
 }

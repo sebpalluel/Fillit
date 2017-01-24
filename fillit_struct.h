@@ -6,13 +6,14 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 20:53:06 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/21 19:06:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/24 22:45:38 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_STRUCT_H
 # define FILLIT_STRUCT_H
-# define TET ((t_tetri*)(*tet)->content)
+
+# define TET(x)		((t_tetri*)(*(x))->content)
 
 typedef	struct		s_tetri
 {

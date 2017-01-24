@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 13:58:58 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/23 14:01:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/24 22:47:06 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ char		tet_value(size_t i, t_list **tet, size_t size, size_t num_coord)
 
 	match_block = 666;
 	if (num_coord < NUMBLOCKS)
-		match_block = TET->coord[num_coord][1] * size + TET->coord[num_coord][0];
+		match_block = TET(tet)->coord[num_coord][1] * size + TET(tet)->coord[num_coord][0];
 	if (i == match_block)
-		return (TET->value);
+		return (TET(tet)->value);
 	else 
 		return ('.');
 }

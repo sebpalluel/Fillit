@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/30 17:41:55 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/01/30 18:55:26 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,10 @@
 # include "fillit_struct.h"
 # include "fillit_define.h"
 # include "libft/libft.h"
-# include <stdio.h> // temporary, to test function, don't forget to erase with all the printf !!
+# include <stdio.h> // TODO
 
 int			read_tetri(t_list **tetri, int fd);
-int			check_format(char *str);
-int			check_tetri(char *str);
-int			check_valid(char *str);
 size_t		organize(t_list **tet, char carac);
-size_t		tet_min_xy(t_list **tet, int *array,  size_t xy);
-size_t		tet_max_xy(t_list **tet, int *array, size_t xy);
-void		mv_upleft(t_list **tet, size_t min[2]);
 size_t		calc_min_square(size_t numtetri);
 size_t		solve(t_list **tet, t_map *map);
 void		initmap(char *map, size_t size, t_list **tet);
@@ -45,6 +39,5 @@ int			put_tetri(char *result, t_map *map, t_list **tet, size_t pos);
 int			test_end(char *tmp_map);
 int			print_map(char *map);
 size_t		add_tetri(t_list **tet, char *buffer);
-size_t		create_tetri(t_tetri *new, char *str);
 
 #endif

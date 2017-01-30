@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 17:11:46 by psebasti          #+#    #+#             */
-/*   Updated: 2016/11/22 20:09:32 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/26 19:30:09 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,5 @@
 
 char	*ft_strcpy(char *dest, const char *src)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	return (ft_strncpy(dest, src, ft_strlen(src) + 1));
 }

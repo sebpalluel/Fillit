@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/11/10 23:29:24 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/01/21 13:23:01 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/01/26 18:47:42 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -31,7 +31,7 @@ SRC		=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c	\
 			ft_lstiter.c ft_lstmap.c ft_lstlen.c ft_lstaddend.c ft_lstfree.c
 OBJ		= 	$(SRC:.c=.o)
 	CMP		= 	gcc
-	FLAGS	= 	-Wall -Wextra -Werror
+	FLAGS	= 	-g -Wall -Wextra -Werror
 
 all: $(NAME)
 

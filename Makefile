@@ -12,13 +12,13 @@
 
 NAME = fillit
 
-SRC = main.c \
-	  draw.c \
-	  map.c \
-	  read.c \
-	  organize.c \
-	  solve.c \
-	  tetri.c
+SRC		=	main.c \
+			draw.c \
+			map.c \
+			read.c \
+			organize.c \
+			solve.c \
+			tetri.c
 
 OBJ		=	$(SRC:.c=.o)
 

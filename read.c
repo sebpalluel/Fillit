@@ -6,20 +6,20 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/28 21:41:43 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/30 18:52:33 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int			check_format(char *str)
+static int		check_format(char *str)
 {
-	size_t	i;
+	size_t		i;
 
 	i = 0;
 	while (i < MAPSIZE)
 	{
-		if (((i + 1) % 5) == 0)
+		if ((i + 1) % 5 == 0)
 		{
 			if (str[i] != '\n')
 				return (0);
@@ -32,11 +32,11 @@ int			check_format(char *str)
 	return (1);
 }
 
-int			check_tetri(char *str)
+static int		check_tetri(char *str)
 {
-	size_t	i;
-	size_t	contact;
-	size_t	num_blocks;
+	size_t		i;
+	size_t		contact;
+	size_t		num_blocks;
 
 	i = 0;
 	contact = 0;
@@ -48,28 +48,28 @@ int			check_tetri(char *str)
 			num_blocks++;
 			if (str[i + 1] == '#')
 				contact++;
-			if(str[i + 5] == '#')
+			if (str[i + 5] == '#')
 				contact++;
 		}
 		i++;
 	}
-	if ((contact == 3 || contact == 4) && (num_blocks == NUMBLOCKS))
+	if ((contact == 3 || contact == 4) && num_blocks == NUMBLOCKS)
 		return (1);
 	return (0);
 }
 
-int			check_valid(char *str)
+static int		check_valid(char *str)
 {
 	return (check_format(str) && check_tetri(str));
 }
 
-size_t 		read_tetri_error(char *buffer)
+static size_t 	read_tetri_error(char *buffer)
 {
 	free(buffer);
 	return (1);
 }
 
-int 		read_tetri(t_list **tetri, int fd)
+int 			read_tetri(t_list **tetri, int fd)
 {
 	char		*buffer;
 	size_t		last_tetri;
@@ -79,11 +79,11 @@ int 		read_tetri(t_list **tetri, int fd)
 	last_tetri = 0;
 	while ((ret = read(fd, buffer, 21)))
 	{
-		printf("%s",buffer);
 		if (ret == 20)
 			last_tetri++;
-		if (!check_valid(buffer) || last_tetri > 1 || \
-				(ret == 21 && buffer[ret - 1] != '\n'))
+		if (!check_valid(buffer) || last_tetri > 1)
+			return (read_tetri_error(buffer));
+		if (ret == 21 && buffer[ret - 1] != '\n')
 			return (read_tetri_error(buffer));
 		if (!add_tetri(tetri, buffer))
 			return (read_tetri_error(buffer));

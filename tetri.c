@@ -6,23 +6,22 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/21 12:39:08 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/25 16:07:16 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-t_tetri		*create_tetri(char *str, char carac)
+size_t		create_tetri(t_tetri *new, char *str)
 {
-	size_t		i;
-	size_t		current;
-	t_tetri		*new;
+	size_t	i;
+	size_t	current;
 
-	if (!(new = malloc(sizeof(t_tetri))))
-		return (NULL);
 	i = 0;
 	current = 0;
 	new->next = NULL;
+	if (!(new->coord = (size_t **)ft_newtab(4, 2)))
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == '#')
@@ -33,32 +32,17 @@ t_tetri		*create_tetri(char *str, char carac)
 		}
 		i++;
 	}
-	new->value = carac;
-	return (new);
+	return (1);
 }
 
-void	add_tetri(t_tetri **tetri, t_tetri *new)
+size_t		add_tetri(t_list **tet, char *buffer)
 {
-	t_tetri *tmp;
+	t_tetri	*tetri_new = NULL;
 
-	tmp = *tetri;
-	if (tetri != NULL && *tetri == NULL)
-		*tetri = new;
-	else
-	{
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
+	if (!(tetri_new = (t_tetri *)ft_memalloc(sizeof(t_tetri))) ||\
+			!(create_tetri(tetri_new, buffer)))
+		return (0);
+	ft_lstaddend(tet, ft_lstnew(tetri_new, sizeof(tetri_new)));
+	return (1);
 }
 
-void	free_tetri(t_tetri **tetri)
-{
-	if(*tetri != NULL)
-	{
-		if((*tetri)->next != NULL)
-			free_tetri(&((*tetri)->next));
-		//free((*tetri)->coord);
-		free(*tetri);
-	}
-}

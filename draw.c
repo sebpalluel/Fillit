@@ -6,17 +6,17 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 15:40:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 15:52:34 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/24 22:47:42 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	erase_tetri(char *array, t_tetri *tet)
+void	erase_tetri(char *array, t_list **tet)
 {
 	while (*array)
 	{
-		if (*array == tet->value)
+		if (*array == TET(tet)->value)
 			*array = '.';
 		array++;
 	}

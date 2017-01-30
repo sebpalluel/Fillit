@@ -6,16 +6,18 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 20:53:06 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/20 18:55:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/24 22:45:38 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_STRUCT_H
 # define FILLIT_STRUCT_H
 
+# define TET(x)		((t_tetri*)(*(x))->content)
+
 typedef	struct		s_tetri
 {
-	unsigned int	coord[4][2];
+	size_t			**coord;
 	size_t			width;
 	size_t			height;
 	char			value;
@@ -26,6 +28,8 @@ typedef	struct		s_map
 {
 	size_t			size;
 	size_t			map_size;
+	size_t			numtetri;
+	size_t			*coord;
 	char			*array;
 }					t_map;
 

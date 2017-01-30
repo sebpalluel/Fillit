@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/30 17:43:06 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:53:30 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ static void		free_map_and_tetri(t_map *map, t_list **tet)
 {
 	free(map->array);
 	free(map->coord);
-	ft_lstdel(tet, free_tet_elem);
 	free(map);
+	ft_lstdel(tet, free_tet_elem);
 	ft_lstfree(tet);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	int		fd;
-	t_list	**tet;
-	t_map 	*map;
-	char	carac;
+	int			fd;
+	t_list		**tet;
+	t_map 		*map;
+	char		carac;
 
 	if(!(tet = (t_list **)ft_memalloc(sizeof(t_list *))) || \
 			!(map = (t_map *)ft_memalloc(sizeof(t_map))))

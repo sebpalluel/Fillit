@@ -6,21 +6,21 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/28 21:41:34 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/01/30 17:41:55 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
+
 # include <string.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include "fillit_struct.h"
+# include "fillit_define.h"
 # include "libft/libft.h"
 # include <stdio.h> // temporary, to test function, don't forget to erase with all the printf !!
-# define NUMBLOCKS 4
-# define MAPSIZE 20
 
 int			read_tetri(t_list **tetri, int fd);
 int			check_format(char *str);
@@ -37,7 +37,7 @@ size_t		init_t_map(t_map *map);
 void		initmap_result(t_map *map, size_t size);
 char		tet_value(size_t i, t_list **tet, size_t size, size_t num_coord);
 int			backtracker(char *result, t_map *map, t_list **tet, int erase);
-//size_t		evaluate_new_pos_tetri(t_map *map, t_tetri *tet, \
+//size_t		evaluate_new_pos_tetri(t_map *map, t_tetri *tet,
 //	unsigned int **coord, size_t pos);
 void		populate_tetri(char *tet_map, t_list **tet);
 void		erase_tetri(char *array, t_list **tet);

@@ -6,22 +6,23 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 20:09:13 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 23:25:05 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/07 23:50:25 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 void	**ft_newtab(size_t height, size_t width)
 {
 	size_t	i;
-	char	**tab;
+	size_t	**tab;
 
 	i = 0;
-	tab = (char **)ft_memalloc(sizeof(char *) * height + 1);
+	tab = (size_t **)ft_memalloc(sizeof(size_t *) * (height + 1));
 	while (tab && i < height)
 	{
-		tab[i] = (char *)ft_memalloc(sizeof(char) * width);
+		tab[i] = (size_t *)ft_memalloc(sizeof(size_t) * width);
 		i++;
 	}
 	tab[height] = NULL;

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 18:44:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/16 23:25:40 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/07 23:22:54 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void	ft_freetab(char **tab)
 	int	i;
 
 	i = 0;
+	if (tab == NULL)
+		return ;
 	while (tab[i])
 	{
-		ft_memdel((void **)&tab[i]);
+		free(tab[i]);
 		i++;
 	}
-	ft_memdel((void **)&tab);
+	free(tab);
 }

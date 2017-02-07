@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/30 18:52:33 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/07 23:39:46 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static int		check_tetri(char *str)
 		if (str[i] == '#')
 		{
 			num_blocks++;
-			if (str[i + 1] == '#')
+			if (i < MAPSIZE - 1 && str[i + 1] == '#')
 				contact++;
-			if (str[i + 5] == '#')
+			if (i < MAPSIZE - 5 && str[i + 5] == '#')
 				contact++;
 		}
 		i++;
@@ -75,18 +75,19 @@ int 			read_tetri(t_list **tetri, int fd)
 	size_t		last_tetri;
 	size_t		ret;
 
-	buffer = ft_strnew(21);
+	buffer = ft_strnew(MAPSIZE + 1);
 	last_tetri = 0;
-	while ((ret = read(fd, buffer, 21)))
+	while ((ret = read(fd, buffer, MAPSIZE + 1)))
 	{
-		if (ret == 20)
+		if (ret == MAPSIZE)
 			last_tetri++;
 		if (!check_valid(buffer) || last_tetri > 1)
 			return (read_tetri_error(buffer));
-		if (ret == 21 && buffer[ret - 1] != '\n')
+		if (ret == MAPSIZE + 1 && buffer[ret - 1] != '\n')
 			return (read_tetri_error(buffer));
 		if (!add_tetri(tetri, buffer))
 			return (read_tetri_error(buffer));
 	}
+	ft_strdel(&buffer);
 	return ((ret = last_tetri ? 0 : 1));
 }

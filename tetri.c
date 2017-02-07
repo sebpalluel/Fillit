@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 14:02:53 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/30 18:56:20 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/07 23:31:07 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ size_t			add_tetri(t_list **tet, char *buffer)
 	if (tetri_new == NULL || create_tetri(tetri_new, buffer) == 0)
 		return (0);
 	ft_lstaddend(tet, ft_lstnew(tetri_new, sizeof(tetri_new)));
+	free(tetri_new);
 	return (1);
 }
 

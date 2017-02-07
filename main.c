@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/30 19:54:31 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/07 23:33:03 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,29 @@
 
 static void		free_map_and_tetri(t_map *map, t_list **tet)
 {
+	t_list		*ptr;
+
 	free(map->array);
 	free(map->coord);
 	free(map);
-	ft_lstfree(tet);
+	if (tet == NULL)
+		return ;
+	ptr = *tet;
+	while (*tet)
+	{
+		if ((*tet)->content)
+		{
+			if (TET(tet)->coord)
+			{
+				ft_freetab((char **)TET(tet)->coord);
+			}
+			free((*tet)->content);
+		}
+		ptr = ptr->next;
+		free(*tet);
+		*tet = ptr;
+	}
+	free(tet);
 }
 
 static int		quit(int error, t_map *map, t_list **tet, int fd)

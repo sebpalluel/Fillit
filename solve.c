@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/24 22:52:23 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/07 22:53:26 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t		solve(t_list **tet, t_map *map)
 
 	size = calc_min_square(map->numtetri) - 1;
 	unsolved = -1;
-	if(init_t_map(map))
+	if(!init_t_map(map))
 		return (0);
 	while (unsolved != 0)
 	{

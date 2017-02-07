@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/30 18:39:18 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/01/30 19:54:31 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int		quit(int error, t_map *map, t_list **tet, int fd)
 
 static int		usage(void)
 {
-	ft_putendl("usage: ./fillit mapname");
+	ft_putendl("usage: ./fillit map");
 	return (ERROR);
 }
 

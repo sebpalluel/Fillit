@@ -10,7 +10,9 @@
 #*                                                                            *#
 #* ************************************************************************** *#
 
-NAME = fillit
+NAME	=	fillit
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror
 
 SRC		=	main.c \
 			draw.c \
@@ -20,28 +22,32 @@ SRC		=	main.c \
 			solve.c \
 			tetri.c
 
+EXT		=	Makefile
+
 OBJ		=	$(SRC:.c=.o)
-
-CMP		=	gcc
-
-FLAGS	=	-Wall -Wextra -Werror
 
 LIB = -L libft/ -lft
 
 all : lib $(NAME)
 
-$(NAME) :
-	$(CMP) $(FLAGS) -o $(NAME) $(SRC) $(LIB)
+$(NAME) : $(OBJ) $(EXT)
+	$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(LIB)
 
 lib :
-	make re -C libft
+	@echo "compiling libft..."
+	@make -C libft --no-print-directory
+	@echo "done."
 
 clean :
 	rm -rf $(OBJ)
-	make -C libft clean
+	@echo "cleaning libft..."
+	@make -C libft clean --no-print-directory
+	@echo "done."
 
 fclean : clean
 	rm -rf $(NAME)
-	make -C libft fclean
+	@echo "full cleaning libft..."
+	@make -C libft fclean --no-print-directory
+	@echo "done."
 
 re : fclean all

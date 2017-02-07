@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/30 18:55:26 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/01/30 19:53:19 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "fillit_struct.h"
 # include "fillit_define.h"
 # include "libft/libft.h"
-# include <stdio.h> // TODO
+# include <stdio.h> // TODO remove dat shit
 
 int			read_tetri(t_list **tetri, int fd);
 size_t		organize(t_list **tet, char carac);

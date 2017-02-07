@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/08 00:04:55 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/08 00:33:53 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ size_t		evaluate_new_pos_tetri(t_map *map, t_list **tet, size_t pos)
 	indexto2D(map->coord, new_pos, map->size);
 	width = map->coord[0] += TET(tet)->width;
 	height = map->coord[1] += TET(tet)->height;
-	while ((width > size || height > size) && new_pos < (map->map_size - NUMBLOCKS))
+	while ((width > size || height > size) && new_pos < (map->map_size - NUMBLOCKS - 1))
 	{
 		new_pos++;
 		indexto2D(map->coord, new_pos, map->size);
@@ -81,7 +81,7 @@ int			backtracker(char *result, t_map *map, t_list **tet, int erase)
 	{
 		populate_tetri(map->array, tet);
 		//printf("\x1b[47;10mmap->array\n%s",map->array);
-		//		pos = evaluate_new_pos_tetri(map, tet, pos);
+		pos = evaluate_new_pos_tetri(map, tet, pos);
 		//if (erase == -2 || erase == -3)
 		//{
 		//printf("\x1b[41;30merase before\n%s",result);

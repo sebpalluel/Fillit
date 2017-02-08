@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/08 00:33:53 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/08 01:37:34 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ size_t		evaluate_new_pos_tetri(t_map *map, t_list **tet, size_t pos)
 	//printf("\x1b[45;15mbacktrack pos %lu, TET(tet)->val %c, TET(tet)->width %lu, TET(tet)->height %lu\n",pos, TET(tet)->value, TET(tet)->width, TET(tet)->height);
 	size = map->size;
 	indexto2D(map->coord, new_pos, map->size);
-	width = map->coord[0] += TET(tet)->width;
-	height = map->coord[1] += TET(tet)->height;
-	while ((width > size || height > size) && new_pos < (map->map_size - NUMBLOCKS - 1))
+	width = map->coord[0] + TET(tet)->width;
+	height = map->coord[1] + TET(tet)->height;
+	while ((width > size + 1 || height > size + 1) && new_pos < (map->map_size - NUMBLOCKS - 1))
 	{
 		new_pos++;
 		indexto2D(map->coord, new_pos, map->size);
-		width = map->coord[0] += TET(tet)->width;
-		height = map->coord[1] += TET(tet)->height;
+		width = map->coord[0] + TET(tet)->width;
+		height = map->coord[1] + TET(tet)->height;
 		//printf("newpos %lu, pos_coord_x %lu, pos_coord_y %lu, width %lu, height %lu\n", new_pos, map->coord[0], map->coord[1], width, height);
 	}
 	return (new_pos);
@@ -102,21 +102,20 @@ int			backtracker(char *result, t_map *map, t_list **tet, int erase)
 int		put_tetri(char *result, t_map *map, t_list **tet, size_t pos)
 {
 	int		i;
-	char	*tmp_map;
+	size_t		j;
 
 	i = 0;
-	tmp_map = result;
-	result = result + pos;
-	while (map->array[i] && *result)
+	j = pos;
+	while (map->array[i] )
 	{
 		//ft_putstr_fd("\x1b[46;30m", 1);
 		//printf("while pos: %lu i: %d map: %c tet: %c\n%s", pos, i, map->array[i], TET(tet)->value, result);
 		if (map->array[i] == TET(tet)->value)
 		{
-			if (*result == '.')
+			if (result[j] == '.')
 			{
 				//printf("print %c\n",map->array[i]);
-				*result = map->array[i];
+				result[j] = map->array[i];
 				//printf("print result\n%s",result);
 			}
 			else
@@ -128,16 +127,16 @@ int		put_tetri(char *result, t_map *map, t_list **tet, size_t pos)
 		}
 		if (map->array[i] == '\n')
 		{
-			result = result + (int)(map->size) - NUMBLOCKS;
+			j += (int)(map->size) - NUMBLOCKS;
 			//printf("\x1b[41;30mgrid+%d:\n",(int)(map->size) - NUMBLOCKS);
-			if (result > (tmp_map + map->map_size))
+			if (j >= map->map_size - 1)
 			{
 				//printf("start i %d:\n%s",i,tmp_map + map->map_size);
 				return (test_end(map->array + i));
 			}
 		}
 		i++;
-		result++;
+		j++;
 	}
 	//map->array = tmp_map;
 	//ft_putstr("\x1b[43;30m");

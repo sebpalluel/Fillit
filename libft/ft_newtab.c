@@ -6,12 +6,11 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 20:09:13 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/07 23:50:25 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/08 00:54:19 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 void	**ft_newtab(size_t height, size_t width)
 {

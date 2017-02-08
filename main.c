@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/02/08 00:08:03 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/08 00:55:53 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int				main(int argc, char **argv)
 	*tet = NULL;
 	carac = 'A';
 	fd = open(argv[1], O_RDONLY);
-	if (read_tetri(tet, fd) || fd == -1)
+	if (fd < 3 || read_tetri(tet, fd))
 		return (quit(ERROR, map, tet, fd));
 	if ((map->numtetri = organize(tet, carac)) == 0)
 		return (quit(ERROR, map, tet, fd));

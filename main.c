@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pciavald <pciavald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 12:50:49 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/02/08 00:55:53 by pciavald         ###   ########.fr       */
+/*   Created: 2017/02/08 15:50:55 by pciavald          #+#    #+#             */
+/*   Updated: 2017/02/08 15:50:56 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int				main(int argc, char **argv)
 {
 	int			fd;
 	t_list		**tet;
-	t_map 		*map;
+	t_map		*map;
 	char		carac;
 
 	if (argc != 2)

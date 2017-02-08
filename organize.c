@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:14:04 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/30 18:55:35 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/08 15:27:53 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ size_t			organize(t_list **tet, char carac)
 {
 	size_t		counter;
 	int			*array;
-	size_t  	min[2];
+	size_t		min[2];
 	t_list		*first_tet;
 
 	counter = 0;
 	first_tet = *tet;
-	if(!(array = (int *)ft_memalloc(NUMBLOCKS * sizeof(*array))))
+	if (!(array = (int *)ft_memalloc(NUMBLOCKS * sizeof(*array))))
 		return (0);
 	while (*tet)
 	{

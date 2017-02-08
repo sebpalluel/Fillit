@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:40:49 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/08 01:42:40 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/08 15:49:51 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ size_t		solve(t_list **tet, t_map *map)
 	size_t	size;
 	size_t	unsolved;
 	char	*result;
-	t_list	*first = NULL;
+	t_list	*first;
 
 	size = calc_min_square(map->numtetri) - 1;
 	unsolved = -1;
-	if(!init_t_map(map))
+	if (!init_t_map(map))
 		return (0);
 	while (unsolved != 0)
 	{
@@ -37,7 +37,7 @@ size_t		solve(t_list **tet, t_map *map)
 	return (1);
 }
 
-void		*indexto2D(size_t *coord, size_t i, size_t width)
+void		*indexto_2d(size_t *coord, size_t i, size_t width)
 {
 	coord[0] = i % width;
 	coord[1] = i / (width + 1);
@@ -53,13 +53,14 @@ size_t		evaluate_new_pos_tetri(t_map *map, t_list **tet, size_t pos)
 
 	new_pos = pos;
 	size = map->size;
-	indexto2D(map->coord, new_pos, map->size);
+	indexto_2d(map->coord, new_pos, map->size);
 	width = map->coord[0] + TET(tet)->width;
 	height = map->coord[1] + TET(tet)->height;
-	while ((width > size + 1 || height > size + 1) && new_pos < (map->map_size - NUMBLOCKS - 1))
+	while ((width > size + 1 || height > size + 1) \
+			&& new_pos < (map->map_size - NUMBLOCKS - 1))
 	{
 		new_pos++;
-		indexto2D(map->coord, new_pos, map->size);
+		indexto_2d(map->coord, new_pos, map->size);
 		width = map->coord[0] + TET(tet)->width;
 		height = map->coord[1] + TET(tet)->height;
 	}
@@ -88,14 +89,14 @@ int			backtracker(char *result, t_map *map, t_list **tet, int erase)
 	return (-1);
 }
 
-int		put_tetri(char *result, t_map *map, t_list **tet, size_t pos)
+int			put_tetri(char *result, t_map *map, t_list **tet, size_t pos)
 {
 	int			i;
 	size_t		j;
 
 	i = 0;
 	j = pos;
-	while (map->array[i] )
+	while (map->array[i])
 	{
 		if (map->array[i] == TET(tet)->value)
 		{

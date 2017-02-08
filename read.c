@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read2.c                                            :+:      :+:    :+:   */
+/*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pciavald <pciavald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 12:51:27 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/02/08 01:11:55 by pciavald         ###   ########.fr       */
+/*   Created: 2017/02/08 15:51:11 by pciavald          #+#    #+#             */
+/*   Updated: 2017/02/08 15:51:12 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ static int		check_format(char *str)
 			if (str[i] != '\n')
 				return (0);
 		}
-		else
-			if (str[i] != '#' && str[i] != '.')
-				return (0);
+		else if (str[i] != '#' && str[i] != '.')
+			return (0);
 		i++;
 	}
 	return (1);
@@ -63,13 +62,13 @@ static int		check_valid(char *str)
 	return (check_format(str) && check_tetri(str));
 }
 
-static size_t 	read_tetri_error(char *buffer)
+static size_t	read_tetri_error(char *buffer)
 {
 	free(buffer);
 	return (1);
 }
 
-int 			read_tetri(t_list **tetri, int fd)
+int				read_tetri(t_list **tetri, int fd)
 {
 	char		*buffer;
 	size_t		last_tetri;

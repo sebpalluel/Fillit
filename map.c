@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 13:58:58 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/08 01:08:37 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/08 15:27:26 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		initmap_result(t_map *map, size_t size)
 
 void		initmap(char *map, size_t size, t_list **tet)
 {
-	size_t 	i;
+	size_t	i;
 	size_t	num_coord;
 
 	i = 0;
@@ -66,7 +66,7 @@ char		tet_value(size_t i, t_list **tet, size_t size, size_t num_coord)
 	}
 	if (i == match_block)
 		return (TET(tet)->value);
-	else 
+	else
 		return ('.');
 }
 

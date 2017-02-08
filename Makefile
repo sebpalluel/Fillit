@@ -39,13 +39,13 @@ lib :
 	@echo "done."
 
 clean :
-	rm -rf $(OBJ)
+	rm -f $(OBJ)
 	@echo "cleaning libft..."
 	@make -C libft clean --no-print-directory
 	@echo "done."
 
 fclean : clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 	@echo "full cleaning libft..."
 	@make -C libft fclean --no-print-directory
 	@echo "done."

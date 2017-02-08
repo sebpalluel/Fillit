@@ -29,21 +29,21 @@ SRC		=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c	\
 			ft_atoi.c ft_itoa.c ft_sqrt.c									\
 			ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c				\
 			ft_lstiter.c ft_lstmap.c ft_lstlen.c ft_lstaddend.c ft_lstfree.c
-OBJ		= 	$(SRC:.c=.o)
-	CMP		= 	gcc
-	FLAGS	= 	-g -Wall -Wextra -Werror
+OBJ		=	$(SRC:.c=.o)
+CMP		=	gcc
+FLAGS	=	-Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	$(CMP) $(FLAGS) -c $(SRC)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
 clean:
-	rm -rf $(OBJ)
+	rm -f $(OBJ)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
 re: fclean all

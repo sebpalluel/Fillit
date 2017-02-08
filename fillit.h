@@ -6,7 +6,7 @@
 /*   By: kda-fons <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:50:26 by kda-fons          #+#    #+#             */
-/*   Updated: 2017/01/30 19:53:19 by pciavald         ###   ########.fr       */
+/*   Updated: 2017/02/08 01:40:49 by pciavald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "fillit_struct.h"
 # include "fillit_define.h"
 # include "libft/libft.h"
-# include <stdio.h> // TODO remove dat shit
 
 int			read_tetri(t_list **tetri, int fd);
 size_t		organize(t_list **tet, char carac);
@@ -31,8 +30,6 @@ size_t		init_t_map(t_map *map);
 void		initmap_result(t_map *map, size_t size);
 char		tet_value(size_t i, t_list **tet, size_t size, size_t num_coord);
 int			backtracker(char *result, t_map *map, t_list **tet, int erase);
-//size_t		evaluate_new_pos_tetri(t_map *map, t_tetri *tet,
-//	unsigned int **coord, size_t pos);
 void		populate_tetri(char *tet_map, t_list **tet);
 void		erase_tetri(char *array, t_list **tet);
 int			put_tetri(char *result, t_map *map, t_list **tet, size_t pos);
